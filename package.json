@@ -1,0 +1,88 @@
+{
+  "name": "@srivtx/sports-workbench",
+  "version": "0.1.7",
+  "description": "Verifiable sports trading workbench for the TxLINE / TxODDS World Cup hackathon. Backtest, signal, and verify on Solana. Free tier, on-chain proof-anchored.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "sports-workbench": "./dist/cli/index.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./agent-kit": {
+      "types": "./dist/agent-kit.d.ts",
+      "import": "./dist/agent-kit.js"
+    },
+    "./client": "./dist/client/index.js",
+    "./backtest": "./dist/backtest/index.js"
+  },
+  "files": [
+    "dist",
+    "SKILL.md",
+    "README.md",
+    "LICENSE",
+    "install.sh",
+    "examples"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "node --test --import tsx tests/*.test.ts",
+    "lint": "tsc --noEmit",
+    "cli": "tsx src/cli/index.ts",
+    "record-demo": "node scripts/record-demo.mjs",
+    "dev": "tsx watch src/cli/index.ts"
+  },
+  "keywords": [
+    "txline",
+    "txodds",
+    "solana",
+    "sports",
+    "trading",
+    "world-cup",
+    "verifiable",
+    "agent",
+    "skill",
+    "solana-agent-kit",
+    "mcp",
+    "skills.sh",
+    "claude",
+    "claude-code",
+    "workbench",
+    "backtester",
+    "merkle-proof"
+  ],
+  "homepage": "https://github.com/srivtx/sports-workbench",
+  "bugs": {
+    "url": "https://github.com/srivtx/sports-workbench/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/srivtx/sports-workbench.git"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@coral-xyz/anchor": "^0.31.1",
+    "@solana/spl-token": "^0.4.9",
+    "@solana/web3.js": "^1.95.4",
+    "axios": "^1.7.7",
+    "tweetnacl": "^1.0.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "commander": "^12.1.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.6.3"
+  }
+}
