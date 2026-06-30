@@ -1,0 +1,61 @@
+{
+  "version": 2,
+  "name": "sports-workbench",
+  "alias": ["sports-workbench.srivtx.xyz"],
+  "builds": [
+    { "src": "vercel/server.js", "use": "@vercel/node" },
+    { "src": "vercel/index.html", "use": "@vercel/static" },
+    { "src": "vercel/_next/**/*", "use": "@vercel/static" },
+    { "src": "vercel/grad2.png", "use": "@vercel/static" },
+    { "src": "vercel/grad3.png", "use": "@vercel/static" },
+    { "src": "vercel/favicon.svg", "use": "@vercel/static" },
+    { "src": "vercel/favicon.ico", "use": "@vercel/static" },
+    { "src": "vercel/apple-touch-icon.png", "use": "@vercel/static" },
+    { "src": "vercel/image.png", "use": "@vercel/static" },
+    { "src": "vercel/install.sh", "use": "@vercel/static" },
+    { "src": "vercel/LICENSE", "use": "@vercel/static" },
+    { "src": "vercel/demo.gif", "use": "@vercel/static" },
+    { "src": "vercel/demo-green.gif", "use": "@vercel/static" },
+    { "src": "vercel/demo-green-bigger-gap.gif", "use": "@vercel/static" },
+    { "src": "vercel/demo-green-same-line.gif", "use": "@vercel/static" },
+    { "src": "vercel/demo-pw.gif", "use": "@vercel/static" },
+    { "src": "vercel/demo.png", "use": "@vercel/static" },
+    { "src": "vercel/404.html", "use": "@vercel/static" },
+    { "src": "vercel/404/**/*", "use": "@vercel/static" },
+    { "src": "vercel/_not-found/**/*", "use": "@vercel/static" },
+    { "src": "vercel/agent/**/*", "use": "@vercel/static" },
+    { "src": "vercel/dev/**/*", "use": "@vercel/static" },
+    { "src": "vercel/demo/**/*", "use": "@vercel/static" },
+    { "src": "vercel/fixtures/**/*", "use": "@vercel/static" },
+    { "src": "vercel/install/**/*", "use": "@vercel/static" },
+    { "src": "vercel/playground/**/*", "use": "@vercel/static" },
+    { "src": "vercel/receipts/**/*", "use": "@vercel/static" },
+    { "src": "vercel/signals/**/*", "use": "@vercel/static" }
+  ],
+  "headers": [
+    {
+      "source": "/install.sh",
+      "headers": [
+        { "key": "Content-Type", "value": "text/x-shellscript" },
+        { "key": "Cache-Control", "value": "public, max-age=300" }
+      ]
+    },
+    {
+      "source": "/_next/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    },
+    {
+      "source": "/(.*)\\.gif",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    }
+  ],
+  "routes": [
+    { "src": "/_next/(.*)", "dest": "/vercel/_next/$1" },
+    { "src": "/api/(.*)", "dest": "/vercel/server.js" },
+    { "src": "/(.*)", "dest": "/vercel/$1" }
+  ]
+}

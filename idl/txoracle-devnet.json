@@ -1,0 +1,3326 @@
+{
+  "accounts": [
+    {
+      "discriminator": [
+        247,
+        221,
+        212,
+        62,
+        42,
+        233,
+        215,
+        190
+      ],
+      "name": "FaucetTracker"
+    },
+    {
+      "discriminator": [
+        104,
+        54,
+        182,
+        211,
+        94,
+        15,
+        215,
+        142
+      ],
+      "name": "MatchedTrade"
+    },
+    {
+      "discriminator": [
+        12,
+        130,
+        12,
+        36,
+        12,
+        221,
+        218,
+        14
+      ],
+      "name": "OrderIntent"
+    },
+    {
+      "discriminator": [
+        173,
+        13,
+        64,
+        22,
+        248,
+        77,
+        110,
+        106
+      ],
+      "name": "PricingMatrix"
+    },
+    {
+      "discriminator": [
+        251,
+        124,
+        237,
+        23,
+        18,
+        126,
+        198,
+        49
+      ],
+      "name": "TradeEscrow"
+    }
+  ],
+  "address": "6pW64gN1s2uqjHkn1unFeEjAwJkPGHoppGvS715wyP2J",
+  "constants": [
+    {
+      "name": "LAMPORTS_PER_SOL",
+      "type": "f64",
+      "value": "1000000000.0"
+    },
+    {
+      "name": "MIN_DEPOSIT_TOKENS",
+      "type": "u64",
+      "value": "1000000"
+    },
+    {
+      "name": "MIN_USER_BALANCE",
+      "type": "u64",
+      "value": "1000000"
+    },
+    {
+      "name": "STAKE_AMOUNT",
+      "type": "u64",
+      "value": "1"
+    },
+    {
+      "name": "SUBSCRIPTION_DURATION",
+      "type": "i64",
+      "value": "3600"
+    },
+    {
+      "name": "SUBSCRIPTION_PRICE_TOKEN",
+      "type": "u64",
+      "value": "1"
+    },
+    {
+      "name": "TOKEN_DECIMALS",
+      "type": "u32",
+      "value": "6"
+    },
+    {
+      "name": "TOKEN_PRICE_IN_SOL",
+      "type": "f64",
+      "value": "0.01"
+    },
+    {
+      "name": "TOKEN_PRICE_IN_USDT",
+      "type": "u128",
+      "value": "1000"
+    },
+    {
+      "name": "TXLINE_MINT",
+      "type": "pubkey",
+      "value": "AfDqUk86FphPTZdSCRBg5bGm6v4Enamnjc3twqQzsVb1"
+    },
+    {
+      "name": "USDT_DECIMALS_FACTOR",
+      "type": "u128",
+      "value": "1000000"
+    },
+    {
+      "name": "USDT_MINT",
+      "type": "pubkey",
+      "value": "ELWTKspHKCnCfCiCiqYw1EDH77k8VCP74dK9qytG2Ujh"
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "msg": "Event is not active",
+      "name": "EventNotActive"
+    },
+    {
+      "code": 6001,
+      "msg": "Prices and price names arrays must be the same length",
+      "name": "PricesMismatch"
+    },
+    {
+      "code": 6002,
+      "msg": "Invalid odds update for this event",
+      "name": "InvalidOddsUpdate"
+    },
+    {
+      "code": 6003,
+      "msg": "Invalid sub-tree proof. The snapshot does not belong to the summary.",
+      "name": "InvalidSubTreeProof"
+    },
+    {
+      "code": 6004,
+      "msg": "Invalid main tree proof. The summary does not belong to the on-chain root.",
+      "name": "InvalidMainTreeProof"
+    },
+    {
+      "code": 6005,
+      "msg": "Time slot mismatch between snapshot and on-chain root account.",
+      "name": "TimeSlotMismatch"
+    },
+    {
+      "code": 6006,
+      "msg": "The provided hour or minute is out of the valid range.",
+      "name": "InvalidTime"
+    },
+    {
+      "code": 6007,
+      "msg": "Merkle root for this time slot has not been posted by the oracle.",
+      "name": "RootNotAvailable"
+    },
+    {
+      "code": 6008,
+      "msg": "Mismatched account discriminator.",
+      "name": "AccountDiscriminatorMismatch"
+    },
+    {
+      "code": 6009,
+      "msg": "The provided daily root account does not match the expected PDA.",
+      "name": "InvalidPda"
+    },
+    {
+      "code": 6010,
+      "msg": "The timestamp provided for seed generation does not match the timestamp in the snapshot payload.",
+      "name": "TimestampMismatch"
+    },
+    {
+      "code": 6011,
+      "msg": "Could not slice the account data correctly.",
+      "name": "SliceError"
+    },
+    {
+      "code": 6012,
+      "msg": "Invalid account owner.",
+      "name": "InvalidOwner"
+    },
+    {
+      "code": 6013,
+      "msg": "Invalid time slot, must be aligned on a 5-min boundary.",
+      "name": "InvalidTimeSlot"
+    },
+    {
+      "code": 6014,
+      "msg": "Stake is still locked and cannot be withdrawn yet.",
+      "name": "StakeStillLocked"
+    },
+    {
+      "code": 6015,
+      "msg": "Invalid recipient of the financial transaction.",
+      "name": "InvalidRecipient"
+    },
+    {
+      "code": 6016,
+      "msg": "You already have an active subscription.",
+      "name": "ActiveSubscription"
+    },
+    {
+      "code": 6017,
+      "msg": "Unauthorized account updater.",
+      "name": "Unauthorized"
+    },
+    {
+      "code": 6018,
+      "msg": "Invalid account owner.",
+      "name": "InvalidAccountOwner"
+    },
+    {
+      "code": 6019,
+      "msg": "Invalid mint authority.",
+      "name": "InvalidMintAuthority"
+    },
+    {
+      "code": 6020,
+      "msg": "Invalid mint.",
+      "name": "InvalidMint"
+    },
+    {
+      "code": 6021,
+      "msg": "Predicate failed.",
+      "name": "PredicateFailed"
+    },
+    {
+      "code": 6022,
+      "msg": "Invalid sub-tree proof for fixture",
+      "name": "InvalidFixtureSubTreeProof"
+    },
+    {
+      "code": 6023,
+      "msg": "Invalid stats proof for event",
+      "name": "InvalidStatProof"
+    },
+    {
+      "code": 6024,
+      "msg": "invalid stat combination",
+      "name": "InvalidStatCombination"
+    },
+    {
+      "code": 6025,
+      "msg": "Missing second stat",
+      "name": "MissingSecondStat"
+    },
+    {
+      "code": 6026,
+      "msg": "Unexpected second stat",
+      "name": "UnexpectedSecondStat"
+    },
+    {
+      "code": 6027,
+      "msg": "Overflow",
+      "name": "Overflow"
+    },
+    {
+      "code": 6028,
+      "msg": "Trade not active",
+      "name": "TradeNotActive"
+    },
+    {
+      "code": 6029,
+      "msg": "Invalid trader",
+      "name": "InvalidTrader"
+    },
+    {
+      "code": 6030,
+      "msg": "Winner mismatch",
+      "name": "WinnerMismatch"
+    },
+    {
+      "code": 6031,
+      "msg": "Trade terms mismatch",
+      "name": "TradeTermsMismatch"
+    },
+    {
+      "code": 6032,
+      "msg": "Unauthorized settler",
+      "name": "UnauthorizedSettler"
+    },
+    {
+      "code": 6033,
+      "msg": "Funds below minimal deposit amount",
+      "name": "FundsBelowMinimumDeposit"
+    },
+    {
+      "code": 6034,
+      "msg": "Insufficient token balance",
+      "name": "InsufficientUserBalance"
+    },
+    {
+      "code": 6035,
+      "msg": "Cannot withdraw zero amount",
+      "name": "ZeroAmount"
+    },
+    {
+      "code": 6036,
+      "msg": "Vault not empty",
+      "name": "VaultNotEmpty"
+    },
+    {
+      "code": 6037,
+      "msg": "Insufficient vault balance",
+      "name": "InsufficientVaultBalance"
+    },
+    {
+      "code": 6038,
+      "msg": "Calculation error",
+      "name": "CalculationError"
+    },
+    {
+      "code": 6039,
+      "msg": "Subscription end Ts invalid",
+      "name": "InvalidSubscriptionTs"
+    },
+    {
+      "code": 6040,
+      "msg": "Cannot shorten an existing subscription",
+      "name": "CannotShortenSubscription"
+    },
+    {
+      "code": 6041,
+      "msg": "Weeks must be greater than zero",
+      "name": "InvalidWeeks"
+    },
+    {
+      "code": 6042,
+      "msg": "Invalid time alignment",
+      "name": "InvalidTimeAlignment"
+    },
+    {
+      "code": 6043,
+      "msg": "Invalid epoch day alignment",
+      "name": "InvalidEpochDayAlignment"
+    },
+    {
+      "code": 6044,
+      "msg": "Account data too small",
+      "name": "AccountDataTooSmall"
+    },
+    {
+      "code": 6045,
+      "msg": "Insufficient liquidity",
+      "name": "InsufficientLiquidity"
+    },
+    {
+      "code": 6046,
+      "msg": "Invalid amount",
+      "name": "InvalidAmount"
+    },
+    {
+      "code": 6047,
+      "msg": "Invalid expiration",
+      "name": "InvalidExpiration"
+    },
+    {
+      "code": 6048,
+      "msg": "Fixture mismatch",
+      "name": "FixtureMismatch"
+    },
+    {
+      "code": 6049,
+      "msg": "Period mismatch",
+      "name": "PeriodMismatch"
+    },
+    {
+      "code": 6050,
+      "msg": "Intent not active",
+      "name": "IntentNotActive"
+    },
+    {
+      "code": 6051,
+      "msg": "Order not yet expired",
+      "name": "OrderNotYetExpired"
+    },
+    {
+      "code": 6052,
+      "msg": "Terms mismatch",
+      "name": "TermsMismatch"
+    },
+    {
+      "code": 6053,
+      "msg": "Stat key mismatch",
+      "name": "StatKeyMismatch"
+    },
+    {
+      "code": 6054,
+      "msg": "Invalid vault",
+      "name": "InvalidVault"
+    },
+    {
+      "code": 6055,
+      "msg": "Equivocation attempt",
+      "name": "EquivocationAttempt"
+    },
+    {
+      "code": 6056,
+      "msg": "Numeric overflow",
+      "name": "NumericOverflow"
+    },
+    {
+      "code": 6057,
+      "msg": "Invalid account data",
+      "name": "InvalidAccountData"
+    },
+    {
+      "code": 6058,
+      "msg": "Rate limit exceeded",
+      "name": "RateLimitExceeded"
+    },
+    {
+      "code": 6059,
+      "msg": "Invalid service level Id",
+      "name": "InvalidServiceLevelId"
+    },
+    {
+      "code": 6060,
+      "msg": "Initial rows limit exceeded",
+      "name": "InitialRowsLimitExceeded"
+    },
+    {
+      "code": 6061,
+      "msg": "Missing stat",
+      "name": "MissingStat"
+    },
+    {
+      "code": 6062,
+      "msg": "Proof too large",
+      "name": "ProofTooLarge"
+    },
+    {
+      "code": 6063,
+      "msg": "Trade too small",
+      "name": "TradeTooSmall"
+    },
+    {
+      "code": 6064,
+      "msg": "Max rows limit exceeded",
+      "name": "MaxRowsLimitExceeded"
+    }
+  ],
+  "events": [
+    {
+      "discriminator": [
+        249,
+        57,
+        59,
+        176,
+        243,
+        27,
+        132,
+        169
+      ],
+      "name": "AuditVerifiedEvent"
+    },
+    {
+      "discriminator": [
+        207,
+        182,
+        115,
+        79,
+        244,
+        25,
+        123,
+        18
+      ],
+      "name": "BatchClaimExecuted"
+    },
+    {
+      "discriminator": [
+        193,
+        25,
+        157,
+        200,
+        184,
+        164,
+        176,
+        252
+      ],
+      "name": "BatchRefundExecuted"
+    },
+    {
+      "discriminator": [
+        127,
+        229,
+        67,
+        202,
+        91,
+        56,
+        164,
+        0
+      ],
+      "name": "IntentClosed"
+    },
+    {
+      "discriminator": [
+        184,
+        46,
+        156,
+        205,
+        169,
+        254,
+        11,
+        108
+      ],
+      "name": "IntentCreated"
+    },
+    {
+      "discriminator": [
+        42,
+        57,
+        255,
+        224,
+        78,
+        10,
+        39,
+        168
+      ],
+      "name": "MatchExecuted"
+    },
+    {
+      "discriminator": [
+        22,
+        119,
+        166,
+        225,
+        175,
+        53,
+        93,
+        216
+      ],
+      "name": "TradeSettled"
+    }
+  ],
+  "instructions": [
+    {
+      "accounts": [
+        {
+          "name": "payer",
+          "signer": true,
+          "writable": true
+        },
+        {
+          "docs": [
+            "to match the standard used in insert_scores_root."
+          ],
+          "name": "daily_scores_merkle_roots"
+        }
+      ],
+      "args": [
+        {
+          "name": "terms",
+          "type": {
+            "defined": {
+              "name": "MarketIntentParams"
+            }
+          }
+        },
+        {
+          "name": "fixture_summary",
+          "type": {
+            "defined": {
+              "name": "ScoresBatchSummary"
+            }
+          }
+        },
+        {
+          "name": "main_tree_proof",
+          "type": {
+            "vec": {
+              "defined": {
+                "name": "ProofNode"
+              }
+            }
+          }
+        },
+        {
+          "name": "fixture_proof",
+          "type": {
+            "vec": {
+              "defined": {
+                "name": "ProofNode"
+              }
+            }
+          }
+        },
+        {
+          "name": "stat_a",
+          "type": {
+            "defined": {
+              "name": "StatTerm"
+            }
+          }
+        },
+        {
+          "name": "stat_b",
+          "type": {
+            "option": {
+              "defined": {
+                "name": "StatTerm"
+              }
+            }
+          }
+        },
+        {
+          "name": "ts",
+          "type": "i64"
+        }
+      ],
+      "discriminator": [
+        50,
+        242,
+        243,
+        5,
+        209,
+        75,
+        76,
+        91
+      ],
+      "name": "audit_trade_result"
+    },
+    {
+      "accounts": [
+        {
+          "name": "payer",
+          "signer": true,
+          "writable": true
+        },
+        {
+          "name": "daily_resolution_roots"
+        },
+        {
+          "docs": [
+            "The Mint is now required to perform decimal-safe transfers (TransferChecked)"
+          ],
+          "name": "token_mint"
+        },
+        {
+          "name": "token_program"
+        },
+        {
+          "name": "system_program"
+        }
+      ],
+      "args": [
+        {
+          "name": "epoch_day",
+          "type": "u16"
+        },
+        {
+          "name": "interval_index",
+          "type": "u16"
+        },
+        {
+          "name": "terms_hash",
+          "type": {
+            "array": [
+              "u8",
+              32
+            ]
+          }
+        },
+        {
+          "name": "winner_is_maker",
+          "type": "bool"
+        },
+        {
+          "name": "seq",
+          "type": "u32"
+        },
+        {
+          "name": "merkle_proof",
+          "type": {
+            "vec": {
+              "defined": {
+                "name": "ProofNode"
+              }
+            }
+          }
+        }
+      ],
+      "discriminator": [
+        254,
+        101,
+        89,
+        255,
+        169,
+        75,
+        207,
+        66
+      ],
+      "name": "claim_batch_legacy"
+    },
+    {
+      "accounts": [
+        {
+          "name": "winner",
+          "signer": true,
+          "writable": true
+        },
+        {
+          "name": "daily_resolution_roots"
+        },
+        {
+          "name": "matched_trade",
+          "writable": true
+        },
+        {
+          "name": "trade_vault",
+          "writable": true
+        },
+        {
+          "name": "winner_token_account",
+          "writable": true
+        },
+        {
+          "name": "token_program"
+        }
+      ],
+      "args": [
+        {
+          "name": "epoch_day",
+          "type": "u16"
+        },
+        {
+          "name": "interval_index",
+          "type": "u16"
+        },
+        {
+          "name": "merkle_proof",
+          "type": {
+            "vec": {
+              "defined": {
+                "name": "ProofNode"
+              }
+            }
+          }
+        }
+      ],
+      "discriminator": [
+        98,
+        206,
+        250,
+        87,
+        151,
+        135,
+        162,
+        181
+      ],
+      "name": "claim_via_resolution"
+    },
+    {
+      "accounts": [
+        {
+          "name": "maker",
+          "writable": true
+        },
+        {
+          "name": "authority",
+          "signer": true,
+          "writable": true
+        },
+        {
+          "name": "order_intent",
+          "writable": true
+        },
+        {
+          "name": "intent_vault",
+          "writable": true
+        },
+        {
+          "name": "maker_token_account",
+          "writable": true
+        },
+        {
+          "name": "token_mint"
+        },
+        {
+          "name": "token_program"
+        }
+      ],
+      "args": [],
+      "discriminator": [
+        112,
+        245,
+        154,
+        249,
+        57,
+        126,
+        54,
+        122
+      ],
+      "name": "close_intent"
+    },
+    {
+      "accounts": [
+        {
+          "name": "pricing_matrix",
+          "writable": true
+        },
+        {
+          "name": "authority",
+          "signer": true,
+          "writable": true
+        },
+        {
+          "name": "system_program"
+        }
+      ],
+      "args": [],
+      "discriminator": [
+        251,
+        118,
+        215,
+        117,
+        22,
+        155,
+        38,
+        73
+      ],
+      "name": "close_pricing_matrix"
+    },
+    {
+      "accounts": [
+        {
+          "name": "maker",
+          "signer": true,
+          "writable": true
+        },
+        {
+          "name": "order_intent",
+          "writable": true
+        },
+        {
+          "name": "intent_vault",
+          "writable": true
+        },
+        {
+          "name": "maker_token_account",
+          "writable": true
+        },
+        {
+          "name": "token_mint"
+        },
+        {
+          "name": "token_program"
+        },
+        {
+          "name": "system_program"
+        }
+      ],
+      "args": [
+        {
+          "name": "intent_id",
+          "type": "u64"
+        },
+        {
+          "name": "terms_hash",
+          "type": {
+            "array": [
+              "u8",
+              32
+            ]
+          }
+        },
+        {
+          "name": "deposit_amount",
+          "type": "u64"
+        },
+        {
+          "name": "expiration_ts",
+          "type": "i64"
+        },
+        {
+          "name": "claim_period",
+          "type": "u16"
+        },
+        {
+          "name": "fixture_id",
+          "type": "i64"
+        }
+      ],
+      "discriminator": [
+        216,
+        214,
+        79,
+        121,
+        23,
+        194,
+        96,
+        104
+      ],
+      "name": "create_intent"
+    },
+    {
+      "accounts": [
+        {
+          "name": "authority",
+          "signer": true,
+          "writable": true
+        },
+        {
+          "name": "trader_a",
+          "signer": true,
+          "writable": true
+        },
+        {
+          "name": "trader_b",
+          "signer": true,
+          "writable": true
+        },
+        {
+          "name": "trader_a_token_account",
+          "writable": true
+        },
+        {
+          "name": "trader_b_token_account",
+          "writable": true
+        },
+        {
+          "name": "trade_escrow",
+          "writable": true
+        },
+        {
+          "name": "escrow_vault",
+          "writable": true
+        },
+        {
+          "name": "stake_token_mint"
+        },
+        {
+          "name": "token_program"
+        },
+        {
+          "name": "system_program"
+        }
+      ],
+      "args": [
+        {
+          "name": "trade_id",
+          "type": "u64"
+        },
+        {
+          "name": "stake_a",
+          "type": "u64"
+        },
+        {
+          "name": "stake_b",
+          "type": "u64"
+        },
+        {
+          "name": "trade_terms_hash",
+          "type": {
+            "array": [
+              "u8",
+              32
+            ]
+          }
+        }
+      ],
+      "discriminator": [
+        183,
+        82,
+        24,
+        245,
+        248,
+        30,
+        204,
+        246
+      ],
+      "name": "create_trade"
+    },
+    {
+      "accounts": [
+        {
+          "name": "solver",
+          "signer": true,
+          "writable": true
+        },
+        {
+          "name": "maker_intent",
+          "writable": true
+        },
+        {
+          "name": "taker_intent",
+          "writable": true
+        },
+        {
+          "name": "maker_vault",
+          "writable": true
+        },
+        {
+          "name": "taker_vault",
+          "writable": true
+        },
+        {
+          "name": "matched_trade",
+          "writable": true
+        },
+        {
+          "name": "trade_vault",
+          "writable": true
+        },
+        {
+          "name": "token_mint"
+        },
+        {
+          "name": "token_program"
+        },
+        {
+          "name": "system_program"
+        }
+      ],
+      "args": [
+        {
+          "name": "trade_id",
+          "type": "u64"
+        },
+        {
+          "name": "maker_stake",
+          "type": "u64"
+        },
+        {
+          "name": "taker_stake",
+          "type": "u64"
+        }
+      ],
+      "discriminator": [
+        76,
+        47,
+        91,
+        223,
+        20,
+        10,
+        147,
+        232
+      ],
+      "name": "execute_match"
+    },
+    {
+      "accounts": [],
+      "args": [
+        {
+          "name": "_params",
+          "type": {
+            "defined": {
+              "name": "MarketIntentParams"
+            }
+          }
+        }
+      ],
+      "discriminator": [
+        142,
+        252,
+        254,
+        118,
+        194,
+        230,
+        160,
+        195
+      ],
+      "name": "expose_structs"
+    },
+    {
+      "accounts": [
+        {
+          "name": "authority",
+          "signer": true,
+          "writable": true
+        },
+        {
+          "name": "pricing_matrix",
+          "writable": true
+        },
+        {
+          "name": "system_program"
+        }
+      ],
+      "args": [
+        {
+          "name": "rows",
+          "type": {
+            "vec": {
+              "defined": {
+                "name": "ServiceRow"
+              }
+            }
+          }
+        }
+      ],
+      "discriminator": [
+        147,
+        32,
+        167,
+        248,
+        235,
+        57,
+        210,
+        6
+      ],
+      "name": "initialize_pricing_matrix"
+    },
+    {
+      "accounts": [
+        {
+          "name": "authority",
+          "signer": true,
+          "writable": true
+        },
+        {
+          "name": "token_treasury_vault",
+          "writable": true
+        },
+        {
+          "name": "token_treasury_pda"
+        },
+        {
+          "name": "subscription_token_mint"
+        },
+        {
+          "name": "system_program"
+        },
+        {
+          "name": "token_program"
+        },
+        {
+          "name": "associated_token_program"
+        }
+      ],
+      "args": [],
+      "discriminator": [
+        18,
+        140,
+        152,
+        210,
+        31,
+        25,
+        22,
+        171
+      ],
+      "name": "initialize_treasury_v2"
+    },
+    {
+      "accounts": [
+        {
+          "name": "authority",
+          "signer": true,
+          "writable": true
+        },
+        {
+          "name": "usdt_treasury_vault",
+          "writable": true
+        },
+        {
+          "name": "usdt_treasury_pda"
+        },
+        {
+          "name": "usdt_mint"
+        },
+        {
+          "name": "token_program"
+        },
+        {
+          "name": "associated_token_program"
+        },
+        {
+          "name": "system_program"
+        }
+      ],
+      "args": [],
+      "discriminator": [
+        81,
+        0,
+        86,
+        241,
+        86,
+        85,
+        243,
+        74
+      ],
+      "name": "initialize_usdt_treasury"
+    },
+    {
+      "accounts": [
+        {
+          "name": "authority",
+          "signer": true,
+          "writable": true
+        },
+        {
+          "name": "daily_batch_roots",
+          "writable": true
+        },
+        {
+          "name": "system_program"
+        }
+      ],
+      "args": [
+        {
+          "name": "epoch_day",
+          "type": "u16"
+        },
+        {
+          "name": "hour_of_day",
+          "type": "u8"
+        },
+        {
+          "name": "minute_of_hour",
+          "type": "u8"
+        },
+        {
+          "name": "root",
+          "type": {
+            "array": [
+              "u8",
+              32
+            ]
+          }
+        },
+        {
+          "name": "account_bump",
+          "type": "u8"
+        }
+      ],
+      "discriminator": [
+        243,
+        170,
+        208,
+        158,
+        207,
+        29,
+        237,
+        93
+      ],
+      "name": "insert_batch_root"
+    },
+    {
+      "accounts": [
+        {
+          "name": "authority",
+          "signer": true,
+          "writable": true
+        },
+        {
+          "docs": [
+            "The address is constrained by the seeds, and we verify the",
+            "discriminator and owner inside the instruction."
+          ],
+          "name": "ten_daily_fixtures_roots",
+          "writable": true
+        },
+        {
+          "name": "system_program"
+        }
+      ],
+      "args": [
+        {
+          "name": "epoch_day",
+          "type": "u16"
+        },
+        {
+          "name": "index",
+          "type": "u64"
+        },
+        {
+          "name": "root",
+          "type": {
+            "array": [
+              "u8",
+              32
+            ]
+          }
+        }
+      ],
+      "discriminator": [
+        18,
+        70,
+        8,
+        160,
+        75,
+        200,
+        109,
+        235
+      ],
+      "name": "insert_fixtures_root"
+    },
+    {
+      "accounts": [
+        {
+          "name": "authority",
+          "signer": true,
+          "writable": true
+        },
+        {
+          "docs": [
+            "The address is constrained by the seeds, and we verify the",
+            "discriminator and owner inside the instruction."
+          ],
+          "name": "daily_scores_roots",
+          "writable": true
+        },
+        {
+          "name": "system_program"
+        }
+      ],
+      "args": [
+        {
+          "name": "epoch_day",
+          "type": "u16"
+        },
+        {
+          "name": "hour_of_day",
+          "type": "u8"
+        },
+        {
+          "name": "minute_of_hour",
+          "type": "u8"
+        },
+        {
+          "name": "root",
+          "type": {
+            "array": [
+              "u8",
+              32
+            ]
+          }
+        }
+      ],
+      "discriminator": [
+        137,
+        39,
+        242,
+        97,
+        131,
+        204,
+        100,
+        133
+      ],
+      "name": "insert_scores_root"
+    },
+    {
+      "accounts": [
+        {
+          "name": "authority",
+          "signer": true,
+          "writable": true
+        },
+        {
+          "name": "daily_resolution_roots",
+          "writable": true
+        },
+        {
+          "name": "system_program"
+        }
+      ],
+      "args": [
+        {
+          "name": "epoch_day",
+          "type": "u16"
+        },
+        {
+          "name": "interval_index",
+          "type": "u16"
+        },
+        {
+          "name": "root",
+          "type": {
+            "array": [
+              "u8",
+              32
+            ]
+          }
+        }
+      ],
+      "discriminator": [
+        191,
+        161,
+        47,
+        36,
+        163,
+        58,
+        31,
+        70
+      ],
+      "name": "publish_resolution_root"
+    },
+    {
+      "accounts": [
+        {
+          "name": "buyer",
+          "signer": true,
+          "writable": true
+        },
+        {
+          "name": "usdt_mint"
+        },
+        {
+          "name": "buyer_usdt_account",
+          "writable": true
+        },
+        {
+          "name": "usdt_treasury_vault",
+          "writable": true
+        },
+        {
+          "name": "usdt_treasury_pda"
+        },
+        {
+          "name": "subscription_token_mint"
+        },
+        {
+          "name": "token_treasury_vault",
+          "writable": true
+        },
+        {
+          "name": "token_treasury_pda"
+        },
+        {
+          "name": "buyer_token_account",
+          "writable": true
+        },
+        {
+          "name": "token_program"
+        },
+        {
+          "name": "token_2022_program"
+        },
+        {
+          "name": "system_program"
+        },
+        {
+          "name": "associated_token_program"
+        }
+      ],
+      "args": [
+        {
+          "name": "txline_amount",
+          "type": "u64"
+        }
+      ],
+      "discriminator": [
+        198,
+        251,
+        223,
+        9,
+        31,
+        184,
+        166,
+        188
+      ],
+      "name": "purchase_subscription_token_usdt"
+    },
+    {
+      "accounts": [
+        {
+          "name": "payer",
+          "signer": true,
+          "writable": true
+        },
+        {
+          "docs": [
+            "The mint is required for transfer_checked logic"
+          ],
+          "name": "token_mint"
+        },
+        {
+          "name": "token_program"
+        },
+        {
+          "name": "system_program"
+        }
+      ],
+      "args": [],
+      "discriminator": [
+        227,
+        54,
+        194,
+        2,
+        78,
+        8,
+        104,
+        29
+      ],
+      "name": "refund_batch"
+    },
+    {
+      "accounts": [
+        {
+          "name": "user",
+          "signer": true,
+          "writable": true
+        },
+        {
+          "name": "faucet_tracker",
+          "writable": true
+        },
+        {
+          "name": "usdt_mint",
+          "writable": true
+        },
+        {
+          "name": "user_usdt_ata",
+          "writable": true
+        },
+        {
+          "name": "usdt_treasury_pda"
+        },
+        {
+          "name": "token_program"
+        },
+        {
+          "name": "associated_token_program"
+        },
+        {
+          "name": "system_program"
+        }
+      ],
+      "args": [],
+      "discriminator": [
+        49,
+        178,
+        104,
+        8,
+        23,
+        120,
+        186,
+        21
+      ],
+      "name": "request_devnet_faucet"
+    },
+    {
+      "accounts": [
+        {
+          "name": "seller",
+          "signer": true,
+          "writable": true
+        },
+        {
+          "name": "usdt_mint"
+        },
+        {
+          "name": "seller_usdt_account",
+          "writable": true
+        },
+        {
+          "name": "usdt_treasury_vault",
+          "writable": true
+        },
+        {
+          "name": "usdt_treasury_pda"
+        },
+        {
+          "name": "token_treasury_vault",
+          "writable": true
+        },
+        {
+          "name": "token_treasury_pda"
+        },
+        {
+          "name": "seller_token_account",
+          "writable": true
+        },
+        {
+          "name": "subscription_token_mint"
+        },
+        {
+          "name": "token_program"
+        },
+        {
+          "name": "token_2022_program"
+        },
+        {
+          "name": "associated_token_program"
+        },
+        {
+          "name": "system_program"
+        }
+      ],
+      "args": [
+        {
+          "name": "txline_amount",
+          "type": "u64"
+        }
+      ],
+      "discriminator": [
+        188,
+        208,
+        146,
+        29,
+        192,
+        202,
+        243,
+        122
+      ],
+      "name": "sell_subscription_token_usdt"
+    },
+    {
+      "accounts": [
+        {
+          "name": "winner",
+          "signer": true,
+          "writable": true
+        },
+        {
+          "name": "daily_scores_merkle_roots"
+        },
+        {
+          "name": "matched_trade",
+          "writable": true
+        },
+        {
+          "name": "trade_vault",
+          "writable": true
+        },
+        {
+          "name": "winner_token_account",
+          "writable": true
+        },
+        {
+          "name": "token_mint"
+        },
+        {
+          "name": "token_program"
+        }
+      ],
+      "args": [
+        {
+          "name": "trade_id",
+          "type": "u64"
+        },
+        {
+          "name": "ts",
+          "type": "i64"
+        },
+        {
+          "name": "fixture_summary",
+          "type": {
+            "defined": {
+              "name": "ScoresBatchSummary"
+            }
+          }
+        },
+        {
+          "name": "fixture_proof",
+          "type": {
+            "vec": {
+              "defined": {
+                "name": "ProofNode"
+              }
+            }
+          }
+        },
+        {
+          "name": "main_tree_proof",
+          "type": {
+            "vec": {
+              "defined": {
+                "name": "ProofNode"
+              }
+            }
+          }
+        },
+        {
+          "name": "stat_a",
+          "type": {
+            "defined": {
+              "name": "StatTerm"
+            }
+          }
+        },
+        {
+          "name": "stat_b",
+          "type": {
+            "option": {
+              "defined": {
+                "name": "StatTerm"
+              }
+            }
+          }
+        },
+        {
+          "name": "terms",
+          "type": {
+            "defined": {
+              "name": "MarketIntentParams"
+            }
+          }
+        }
+      ],
+      "discriminator": [
+        191,
+        233,
+        149,
+        116,
+        32,
+        239,
+        18,
+        65
+      ],
+      "name": "settle_matched_trade"
+    },
+    {
+      "accounts": [
+        {
+          "name": "winner",
+          "signer": true,
+          "writable": true
+        },
+        {
+          "name": "daily_scores_merkle_roots"
+        },
+        {
+          "name": "trade_escrow",
+          "writable": true
+        },
+        {
+          "name": "escrow_vault",
+          "writable": true
+        },
+        {
+          "name": "winner_token_account",
+          "writable": true
+        },
+        {
+          "name": "token_mint"
+        },
+        {
+          "name": "token_program"
+        },
+        {
+          "name": "system_program"
+        }
+      ],
+      "args": [
+        {
+          "name": "trade_id",
+          "type": "u64"
+        },
+        {
+          "name": "ts",
+          "type": "i64"
+        },
+        {
+          "name": "fixture_summary",
+          "type": {
+            "defined": {
+              "name": "ScoresBatchSummary"
+            }
+          }
+        },
+        {
+          "name": "fixture_proof",
+          "type": {
+            "vec": {
+              "defined": {
+                "name": "ProofNode"
+              }
+            }
+          }
+        },
+        {
+          "name": "main_tree_proof",
+          "type": {
+            "vec": {
+              "defined": {
+                "name": "ProofNode"
+              }
+            }
+          }
+        },
+        {
+          "name": "predicate",
+          "type": {
+            "defined": {
+              "name": "TraderPredicate"
+            }
+          }
+        },
+        {
+          "name": "stat_a",
+          "type": {
+            "defined": {
+              "name": "StatTerm"
+            }
+          }
+        },
+        {
+          "name": "stat_b",
+          "type": {
+            "option": {
+              "defined": {
+                "name": "StatTerm"
+              }
+            }
+          }
+        },
+        {
+          "name": "op",
+          "type": {
+            "option": {
+              "defined": {
+                "name": "BinaryExpression"
+              }
+            }
+          }
+        }
+      ],
+      "discriminator": [
+        252,
+        176,
+        98,
+        248,
+        73,
+        123,
+        8,
+        157
+      ],
+      "name": "settle_trade"
+    },
+    {
+      "accounts": [
+        {
+          "name": "user",
+          "signer": true,
+          "writable": true
+        },
+        {
+          "name": "pricing_matrix"
+        },
+        {
+          "name": "token_mint"
+        },
+        {
+          "name": "user_token_account",
+          "writable": true
+        },
+        {
+          "name": "token_treasury_vault",
+          "writable": true
+        },
+        {
+          "docs": [
+            "Hold the PDA that owns the vault"
+          ],
+          "name": "token_treasury_pda"
+        },
+        {
+          "name": "token_program"
+        },
+        {
+          "name": "system_program"
+        },
+        {
+          "name": "associated_token_program"
+        }
+      ],
+      "args": [
+        {
+          "name": "service_level_id",
+          "type": "u16"
+        },
+        {
+          "name": "weeks",
+          "type": "u8"
+        }
+      ],
+      "discriminator": [
+        254,
+        28,
+        191,
+        138,
+        156,
+        179,
+        183,
+        53
+      ],
+      "name": "subscribe"
+    },
+    {
+      "accounts": [
+        {
+          "name": "user",
+          "signer": true,
+          "writable": true
+        },
+        {
+          "name": "token_mint"
+        },
+        {
+          "name": "user_token_account",
+          "writable": true
+        },
+        {
+          "name": "token_treasury_vault",
+          "writable": true
+        },
+        {
+          "docs": [
+            "Hold the PDA that owns the vault"
+          ],
+          "name": "token_treasury_pda"
+        },
+        {
+          "name": "token_program"
+        },
+        {
+          "name": "system_program"
+        },
+        {
+          "name": "associated_token_program"
+        }
+      ],
+      "args": [
+        {
+          "name": "weeks",
+          "type": "u8"
+        }
+      ],
+      "discriminator": [
+        13,
+        248,
+        232,
+        63,
+        182,
+        236,
+        71,
+        149
+      ],
+      "name": "subscribe_v2"
+    },
+    {
+      "accounts": [
+        {
+          "name": "user",
+          "signer": true,
+          "writable": true
+        },
+        {
+          "name": "pricing_matrix"
+        },
+        {
+          "name": "token_mint"
+        },
+        {
+          "name": "user_token_account",
+          "writable": true
+        },
+        {
+          "name": "token_treasury_vault",
+          "writable": true
+        },
+        {
+          "docs": [
+            "The PDA that owns the vault"
+          ],
+          "name": "token_treasury_pda"
+        },
+        {
+          "name": "token_program"
+        },
+        {
+          "name": "system_program"
+        },
+        {
+          "name": "associated_token_program"
+        }
+      ],
+      "args": [
+        {
+          "name": "service_level_id",
+          "type": "u16"
+        },
+        {
+          "name": "weeks",
+          "type": "u8"
+        },
+        {
+          "name": "encrypted_payload",
+          "type": "bytes"
+        }
+      ],
+      "discriminator": [
+        184,
+        57,
+        19,
+        15,
+        241,
+        194,
+        240,
+        220
+      ],
+      "name": "subscribe_with_token"
+    },
+    {
+      "accounts": [
+        {
+          "name": "authority",
+          "signer": true,
+          "writable": true
+        },
+        {
+          "name": "pricing_matrix",
+          "writable": true
+        },
+        {
+          "name": "system_program"
+        }
+      ],
+      "args": [
+        {
+          "name": "rows",
+          "type": {
+            "vec": {
+              "defined": {
+                "name": "ServiceRow"
+              }
+            }
+          }
+        }
+      ],
+      "discriminator": [
+        177,
+        191,
+        172,
+        252,
+        42,
+        203,
+        8,
+        164
+      ],
+      "name": "update_pricing_matrix"
+    },
+    {
+      "accounts": [
+        {
+          "docs": [
+            "The address is constrained by seeds, ensuring we load the correct PDA."
+          ],
+          "name": "ten_daily_fixtures_roots"
+        }
+      ],
+      "args": [
+        {
+          "name": "snapshot",
+          "type": {
+            "defined": {
+              "name": "Fixture"
+            }
+          }
+        },
+        {
+          "name": "summary",
+          "type": {
+            "defined": {
+              "name": "FixtureBatchSummary"
+            }
+          }
+        },
+        {
+          "name": "sub_tree_proof",
+          "type": {
+            "vec": {
+              "defined": {
+                "name": "ProofNode"
+              }
+            }
+          }
+        },
+        {
+          "name": "main_tree_proof",
+          "type": {
+            "vec": {
+              "defined": {
+                "name": "ProofNode"
+              }
+            }
+          }
+        }
+      ],
+      "discriminator": [
+        231,
+        129,
+        218,
+        86,
+        223,
+        114,
+        21,
+        126
+      ],
+      "name": "validate_fixture"
+    },
+    {
+      "accounts": [
+        {
+          "docs": [
+            "The address is constrained by seeds, ensuring we load the correct PDA."
+          ],
+          "name": "ten_daily_fixtures_roots"
+        }
+      ],
+      "args": [
+        {
+          "name": "index",
+          "type": "u8"
+        },
+        {
+          "name": "metadata",
+          "type": {
+            "defined": {
+              "name": "BatchMetadata"
+            }
+          }
+        },
+        {
+          "name": "proof",
+          "type": {
+            "vec": {
+              "defined": {
+                "name": "ProofNode"
+              }
+            }
+          }
+        }
+      ],
+      "discriminator": [
+        85,
+        223,
+        204,
+        7,
+        4,
+        87,
+        157,
+        1
+      ],
+      "name": "validate_fixture_batch"
+    },
+    {
+      "accounts": [
+        {
+          "name": "daily_odds_merkle_roots"
+        }
+      ],
+      "args": [
+        {
+          "name": "ts",
+          "type": "i64"
+        },
+        {
+          "name": "odds_snapshot",
+          "type": {
+            "defined": {
+              "name": "Odds"
+            }
+          }
+        },
+        {
+          "name": "summary",
+          "type": {
+            "defined": {
+              "name": "OddsBatchSummary"
+            }
+          }
+        },
+        {
+          "name": "sub_tree_proof",
+          "type": {
+            "vec": {
+              "defined": {
+                "name": "ProofNode"
+              }
+            }
+          }
+        },
+        {
+          "name": "main_tree_proof",
+          "type": {
+            "vec": {
+              "defined": {
+                "name": "ProofNode"
+              }
+            }
+          }
+        }
+      ],
+      "discriminator": [
+        192,
+        19,
+        91,
+        138,
+        104,
+        100,
+        212,
+        86
+      ],
+      "name": "validate_odds"
+    },
+    {
+      "accounts": [
+        {
+          "name": "daily_scores_merkle_roots"
+        }
+      ],
+      "args": [
+        {
+          "name": "ts",
+          "type": "i64"
+        },
+        {
+          "name": "fixture_summary",
+          "type": {
+            "defined": {
+              "name": "ScoresBatchSummary"
+            }
+          }
+        },
+        {
+          "name": "fixture_proof",
+          "type": {
+            "vec": {
+              "defined": {
+                "name": "ProofNode"
+              }
+            }
+          }
+        },
+        {
+          "name": "main_tree_proof",
+          "type": {
+            "vec": {
+              "defined": {
+                "name": "ProofNode"
+              }
+            }
+          }
+        },
+        {
+          "name": "predicate",
+          "type": {
+            "defined": {
+              "name": "TraderPredicate"
+            }
+          }
+        },
+        {
+          "name": "stat_a",
+          "type": {
+            "defined": {
+              "name": "StatTerm"
+            }
+          }
+        },
+        {
+          "name": "stat_b",
+          "type": {
+            "option": {
+              "defined": {
+                "name": "StatTerm"
+              }
+            }
+          }
+        },
+        {
+          "name": "op",
+          "type": {
+            "option": {
+              "defined": {
+                "name": "BinaryExpression"
+              }
+            }
+          }
+        }
+      ],
+      "discriminator": [
+        107,
+        197,
+        232,
+        90,
+        191,
+        136,
+        105,
+        185
+      ],
+      "name": "validate_stat"
+    },
+    {
+      "accounts": [
+        {
+          "name": "authority",
+          "signer": true,
+          "writable": true
+        },
+        {
+          "name": "admin_destination",
+          "writable": true
+        },
+        {
+          "name": "usdt_treasury_vault",
+          "writable": true
+        },
+        {
+          "name": "usdt_treasury_pda"
+        },
+        {
+          "name": "usdt_mint"
+        },
+        {
+          "name": "token_program"
+        },
+        {
+          "name": "associated_token_program"
+        },
+        {
+          "name": "system_program"
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ],
+      "discriminator": [
+        117,
+        75,
+        94,
+        162,
+        178,
+        92,
+        19,
+        141
+      ],
+      "name": "withdraw_usdt"
+    }
+  ],
+  "metadata": {
+    "description": "TxODDS TxLINE and Data Channels",
+    "name": "txoracle",
+    "spec": "0.1.0",
+    "version": "1.4.2"
+  },
+  "types": [
+    {
+      "name": "AuditVerifiedEvent",
+      "type": {
+        "fields": [
+          {
+            "name": "auditor",
+            "type": "pubkey"
+          },
+          {
+            "name": "terms_hash",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "root_used",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "result",
+            "type": "bool"
+          },
+          {
+            "name": "match_timestamp",
+            "type": "i64"
+          },
+          {
+            "name": "audit_timestamp",
+            "type": "i64"
+          }
+        ],
+        "kind": "struct"
+      }
+    },
+    {
+      "name": "BatchClaimExecuted",
+      "type": {
+        "fields": [
+          {
+            "name": "payer",
+            "type": "pubkey"
+          },
+          {
+            "name": "trade_count",
+            "type": "u16"
+          },
+          {
+            "name": "total_payout_amount",
+            "type": "u64"
+          },
+          {
+            "name": "total_rent_reclaimed",
+            "type": "u64"
+          }
+        ],
+        "kind": "struct"
+      }
+    },
+    {
+      "name": "BatchMetadata",
+      "type": {
+        "fields": [
+          {
+            "name": "total_update_count",
+            "type": "i32"
+          },
+          {
+            "name": "num_unique_fixtures",
+            "type": "i32"
+          },
+          {
+            "name": "overall_batch_start_ts",
+            "type": "i64"
+          },
+          {
+            "name": "overall_batch_end_ts",
+            "type": "i64"
+          }
+        ],
+        "kind": "struct"
+      }
+    },
+    {
+      "name": "BatchRefundExecuted",
+      "type": {
+        "fields": [
+          {
+            "name": "payer",
+            "type": "pubkey"
+          },
+          {
+            "name": "trade_count",
+            "type": "u16"
+          },
+          {
+            "name": "total_rent_reclaimed",
+            "type": "u64"
+          }
+        ],
+        "kind": "struct"
+      }
+    },
+    {
+      "name": "BinaryExpression",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Add"
+          },
+          {
+            "name": "Subtract"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Comparison",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "GreaterThan"
+          },
+          {
+            "name": "LessThan"
+          },
+          {
+            "name": "EqualTo"
+          }
+        ]
+      }
+    },
+    {
+      "name": "FaucetTracker",
+      "type": {
+        "fields": [
+          {
+            "name": "last_request_time",
+            "type": "i64"
+          }
+        ],
+        "kind": "struct"
+      }
+    },
+    {
+      "name": "Fixture",
+      "type": {
+        "fields": [
+          {
+            "name": "ts",
+            "type": "i64"
+          },
+          {
+            "name": "start_time",
+            "type": "i64"
+          },
+          {
+            "name": "competition",
+            "type": "string"
+          },
+          {
+            "name": "competition_id",
+            "type": "i32"
+          },
+          {
+            "name": "fixture_group_id",
+            "type": "i32"
+          },
+          {
+            "name": "participant1_id",
+            "type": "i32"
+          },
+          {
+            "name": "participant1",
+            "type": "string"
+          },
+          {
+            "name": "participant2_id",
+            "type": "i32"
+          },
+          {
+            "name": "participant2",
+            "type": "string"
+          },
+          {
+            "name": "fixture_id",
+            "type": "i64"
+          },
+          {
+            "name": "participant1_is_home",
+            "type": "bool"
+          }
+        ],
+        "kind": "struct"
+      }
+    },
+    {
+      "name": "FixtureBatchSummary",
+      "type": {
+        "fields": [
+          {
+            "name": "fixture_id",
+            "type": "i64"
+          },
+          {
+            "name": "competition_id",
+            "type": "i32"
+          },
+          {
+            "name": "competition",
+            "type": "string"
+          },
+          {
+            "name": "update_stats",
+            "type": {
+              "defined": {
+                "name": "FixtureUpdateStats"
+              }
+            }
+          },
+          {
+            "name": "update_sub_tree_root",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          }
+        ],
+        "kind": "struct"
+      }
+    },
+    {
+      "name": "FixtureUpdateStats",
+      "type": {
+        "fields": [
+          {
+            "name": "update_count",
+            "type": "u32"
+          },
+          {
+            "name": "min_timestamp",
+            "type": "i64"
+          },
+          {
+            "name": "max_timestamp",
+            "type": "i64"
+          }
+        ],
+        "kind": "struct"
+      }
+    },
+    {
+      "name": "IntentClosed",
+      "type": {
+        "fields": [
+          {
+            "name": "maker",
+            "type": "pubkey"
+          },
+          {
+            "name": "intent_id",
+            "type": "u64"
+          },
+          {
+            "name": "refund_amount",
+            "type": "u64"
+          },
+          {
+            "name": "closed_by",
+            "type": "pubkey"
+          }
+        ],
+        "kind": "struct"
+      }
+    },
+    {
+      "name": "IntentCreated",
+      "type": {
+        "fields": [
+          {
+            "name": "maker",
+            "type": "pubkey"
+          },
+          {
+            "name": "token_mint",
+            "type": "pubkey"
+          },
+          {
+            "name": "intent_id",
+            "type": "u64"
+          },
+          {
+            "name": "fixture_id",
+            "type": "i64"
+          },
+          {
+            "name": "deposit_amount",
+            "type": "u64"
+          },
+          {
+            "name": "expiration_ts",
+            "type": "i64"
+          },
+          {
+            "name": "terms_hash",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          }
+        ],
+        "kind": "struct"
+      }
+    },
+    {
+      "name": "IntentState",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Active"
+          },
+          {
+            "name": "Locked"
+          },
+          {
+            "name": "Closed"
+          },
+          {
+            "name": "Expired"
+          }
+        ]
+      }
+    },
+    {
+      "name": "MarketIntentParams",
+      "type": {
+        "fields": [
+          {
+            "name": "fixture_id",
+            "type": "i64"
+          },
+          {
+            "name": "period",
+            "type": "u16"
+          },
+          {
+            "name": "stat_a_key",
+            "type": "u32"
+          },
+          {
+            "name": "stat_b_key",
+            "type": {
+              "option": "u32"
+            }
+          },
+          {
+            "name": "predicate",
+            "type": {
+              "defined": {
+                "name": "TraderPredicate"
+              }
+            }
+          },
+          {
+            "name": "op",
+            "type": {
+              "option": {
+                "defined": {
+                  "name": "BinaryExpression"
+                }
+              }
+            }
+          },
+          {
+            "name": "negation",
+            "type": "bool"
+          }
+        ],
+        "kind": "struct"
+      }
+    },
+    {
+      "name": "MatchExecuted",
+      "type": {
+        "fields": [
+          {
+            "name": "trade_id",
+            "type": "u64"
+          },
+          {
+            "name": "maker",
+            "type": "pubkey"
+          },
+          {
+            "name": "taker",
+            "type": "pubkey"
+          },
+          {
+            "name": "maker_stake",
+            "type": "u64"
+          },
+          {
+            "name": "taker_stake",
+            "type": "u64"
+          },
+          {
+            "name": "token_mint",
+            "type": "pubkey"
+          }
+        ],
+        "kind": "struct"
+      }
+    },
+    {
+      "name": "MatchedTrade",
+      "type": {
+        "fields": [
+          {
+            "name": "trade_id",
+            "type": "u64"
+          },
+          {
+            "name": "maker",
+            "type": "pubkey"
+          },
+          {
+            "name": "taker",
+            "type": "pubkey"
+          },
+          {
+            "name": "stake_maker",
+            "type": "u64"
+          },
+          {
+            "name": "stake_taker",
+            "type": "u64"
+          },
+          {
+            "name": "terms_hash",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "state",
+            "type": {
+              "defined": {
+                "name": "TradeState"
+              }
+            }
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ],
+        "kind": "struct"
+      }
+    },
+    {
+      "name": "Odds",
+      "type": {
+        "fields": [
+          {
+            "name": "fixture_id",
+            "type": "i64"
+          },
+          {
+            "name": "message_id",
+            "type": "string"
+          },
+          {
+            "name": "ts",
+            "type": "i64"
+          },
+          {
+            "name": "bookmaker",
+            "type": "string"
+          },
+          {
+            "name": "bookmaker_id",
+            "type": "i32"
+          },
+          {
+            "name": "super_odds_type",
+            "type": "string"
+          },
+          {
+            "name": "game_state",
+            "type": {
+              "option": "string"
+            }
+          },
+          {
+            "name": "in_running",
+            "type": "bool"
+          },
+          {
+            "name": "market_parameters",
+            "type": {
+              "option": "string"
+            }
+          },
+          {
+            "name": "market_period",
+            "type": {
+              "option": "string"
+            }
+          },
+          {
+            "name": "price_names",
+            "type": {
+              "vec": "string"
+            }
+          },
+          {
+            "name": "prices",
+            "type": {
+              "vec": "i32"
+            }
+          }
+        ],
+        "kind": "struct"
+      }
+    },
+    {
+      "name": "OddsBatchSummary",
+      "type": {
+        "fields": [
+          {
+            "name": "fixture_id",
+            "type": "i64"
+          },
+          {
+            "name": "update_stats",
+            "type": {
+              "defined": {
+                "name": "OddsUpdateStats"
+              }
+            }
+          },
+          {
+            "name": "odds_sub_tree_root",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          }
+        ],
+        "kind": "struct"
+      }
+    },
+    {
+      "name": "OddsUpdateStats",
+      "type": {
+        "fields": [
+          {
+            "name": "update_count",
+            "type": "u32"
+          },
+          {
+            "name": "min_timestamp",
+            "type": "i64"
+          },
+          {
+            "name": "max_timestamp",
+            "type": "i64"
+          }
+        ],
+        "kind": "struct"
+      }
+    },
+    {
+      "name": "OrderIntent",
+      "type": {
+        "fields": [
+          {
+            "name": "maker",
+            "type": "pubkey"
+          },
+          {
+            "name": "intent_id",
+            "type": "u64"
+          },
+          {
+            "name": "deposit_amount",
+            "type": "u64"
+          },
+          {
+            "name": "remaining_amount",
+            "type": "u64"
+          },
+          {
+            "name": "odds",
+            "type": "u16"
+          },
+          {
+            "name": "terms_hash",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "fixture_id",
+            "type": "i64"
+          },
+          {
+            "name": "period",
+            "type": "u16"
+          },
+          {
+            "name": "expiration_ts",
+            "type": "i64"
+          },
+          {
+            "name": "state",
+            "type": {
+              "defined": {
+                "name": "IntentState"
+              }
+            }
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ],
+        "kind": "struct"
+      }
+    },
+    {
+      "name": "PricingMatrix",
+      "type": {
+        "fields": [
+          {
+            "name": "admin",
+            "type": "pubkey"
+          },
+          {
+            "name": "rows",
+            "type": {
+              "vec": {
+                "defined": {
+                  "name": "ServiceRow"
+                }
+              }
+            }
+          }
+        ],
+        "kind": "struct"
+      }
+    },
+    {
+      "name": "ProofNode",
+      "type": {
+        "fields": [
+          {
+            "name": "hash",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "is_right_sibling",
+            "type": "bool"
+          }
+        ],
+        "kind": "struct"
+      }
+    },
+    {
+      "docs": [
+        "The on-chain representation of a single, provable key-value statistic.",
+        "This is the leaf of the inner-most Merkle tree."
+      ],
+      "name": "ScoreStat",
+      "type": {
+        "fields": [
+          {
+            "name": "key",
+            "type": "u32"
+          },
+          {
+            "name": "value",
+            "type": "i32"
+          },
+          {
+            "name": "period",
+            "type": "i32"
+          }
+        ],
+        "kind": "struct"
+      }
+    },
+    {
+      "docs": [
+        "The summary for a single fixture's scores events within a 5-minute batch.",
+        "This contains the root of the sub-tree of all events for that fixture."
+      ],
+      "name": "ScoresBatchSummary",
+      "type": {
+        "fields": [
+          {
+            "name": "fixture_id",
+            "type": "i64"
+          },
+          {
+            "name": "update_stats",
+            "type": {
+              "defined": {
+                "name": "ScoresUpdateStats"
+              }
+            }
+          },
+          {
+            "name": "events_sub_tree_root",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          }
+        ],
+        "kind": "struct"
+      }
+    },
+    {
+      "name": "ScoresUpdateStats",
+      "type": {
+        "fields": [
+          {
+            "name": "update_count",
+            "type": "i32"
+          },
+          {
+            "name": "min_timestamp",
+            "type": "i64"
+          },
+          {
+            "name": "max_timestamp",
+            "type": "i64"
+          }
+        ],
+        "kind": "struct"
+      }
+    },
+    {
+      "name": "ServiceRow",
+      "type": {
+        "fields": [
+          {
+            "name": "row_id",
+            "type": "u16"
+          },
+          {
+            "name": "price_per_week_token",
+            "type": "u64"
+          },
+          {
+            "name": "sampling_interval_sec",
+            "type": "u32"
+          },
+          {
+            "name": "league_bundle_id",
+            "type": "i16"
+          },
+          {
+            "name": "market_bundle_id",
+            "type": "i16"
+          }
+        ],
+        "kind": "struct"
+      }
+    },
+    {
+      "name": "StatTerm",
+      "type": {
+        "fields": [
+          {
+            "name": "stat_to_prove",
+            "type": {
+              "defined": {
+                "name": "ScoreStat"
+              }
+            }
+          },
+          {
+            "name": "event_stat_root",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "stat_proof",
+            "type": {
+              "vec": {
+                "defined": {
+                  "name": "ProofNode"
+                }
+              }
+            }
+          }
+        ],
+        "kind": "struct"
+      }
+    },
+    {
+      "name": "TradeEscrow",
+      "type": {
+        "fields": [
+          {
+            "name": "trade_id",
+            "type": "u64"
+          },
+          {
+            "name": "trader_a",
+            "type": "pubkey"
+          },
+          {
+            "name": "trader_b",
+            "type": "pubkey"
+          },
+          {
+            "name": "stake_a",
+            "type": "u64"
+          },
+          {
+            "name": "stake_b",
+            "type": "u64"
+          },
+          {
+            "name": "trade_terms_hash",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "state",
+            "type": {
+              "defined": {
+                "name": "TradeState"
+              }
+            }
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          },
+          {
+            "name": "created_at",
+            "type": "i64"
+          },
+          {
+            "name": "expires_at",
+            "type": "i64"
+          },
+          {
+            "name": "fee_amount",
+            "type": "u64"
+          },
+          {
+            "name": "padding",
+            "type": {
+              "array": [
+                "u8",
+                64
+              ]
+            }
+          }
+        ],
+        "kind": "struct"
+      }
+    },
+    {
+      "name": "TradeSettled",
+      "type": {
+        "fields": [
+          {
+            "name": "trade_id",
+            "type": "u64"
+          },
+          {
+            "name": "winner",
+            "type": "pubkey"
+          },
+          {
+            "name": "payout_amount",
+            "type": "u64"
+          },
+          {
+            "name": "token_mint",
+            "type": "pubkey"
+          }
+        ],
+        "kind": "struct"
+      }
+    },
+    {
+      "name": "TradeState",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Active"
+          },
+          {
+            "name": "Resolved"
+          },
+          {
+            "name": "Disputed"
+          }
+        ]
+      }
+    },
+    {
+      "name": "TraderPredicate",
+      "type": {
+        "fields": [
+          {
+            "name": "threshold",
+            "type": "i32"
+          },
+          {
+            "name": "comparison",
+            "type": {
+              "defined": {
+                "name": "Comparison"
+              }
+            }
+          }
+        ],
+        "kind": "struct"
+      }
+    }
+  ]
+}

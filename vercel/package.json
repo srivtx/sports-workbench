@@ -1,0 +1,6 @@
+{
+  "name": "sports-workbench-static",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Static export of sports-workbench Next.js site served by Vercel"
+}
