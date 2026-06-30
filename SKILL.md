@@ -1,3 +1,8 @@
+---
+name: sports-workbench
+description: Backtest sports trading strategies against historical TxLINE odds, stream live signals from the free World Cup tier, and generate Verifiable Settlement Receipts anchored to Solana. Use when the user wants verifiable sports trading data, Merkle proof-backed odds, or on-chain attestation of signal data.
+---
+
 # Sports Workbench
 
 A verifiable sports trading workbench for the TxLINE / TxODDS World Cup Hackathon. Backtest, signal, and verify on Solana.
@@ -59,7 +64,7 @@ npx -p @srivtx/sports-workbench sports-workbench doctor --fix
 
 - `POST /auth/guest/start` — guest JWT (works on `txline.txodds.com` or `txline-dev.txodds.com`)
 - `POST /api/token/activate` — exchange on-chain subscribe tx for a 30-day `X-Api-Token`
-- `GET /api/fixtures/snapshot/{epochDay}` — fixture list
+- `GET /api/fixtures/snapshot` — fixture list (use optional `?competitionId=`)
 - `GET /api/odds/snapshot/{fixtureId}` — historical odds snapshot
 - `GET /api/odds/updates/{epochDay}/{hourOfDay}/{interval}` — 5-min historical odds
 - `GET /api/odds/validation?messageId=…&ts=…` — Merkle proof
