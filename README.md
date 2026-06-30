@@ -1,9 +1,20 @@
 <div align="center">
 
+<br/>
+
+<picture>
+  <source media="(prefers-color-scheme: light)" srcset="public/logo.svg">
+  <img alt="sports-workbench" src="public/logo.svg" width="160">
+</picture>
+
+<br/>
+
 # sports-workbench
 
 **A verifiable sports trading workbench for the TxLINE / TxODDS World Cup hackathon.**
 Every signal is anchored to a Solana Merkle proof. Free tier, on-chain, open source.
+
+<br/>
 
 <p align="center">
   <img src="public/demo-green.gif" alt="sports-workbench CLI demo — verifiable signals streaming on Solana devnet" width="720">
