@@ -1,32 +1,29 @@
 <div align="center">
 
-<img alt="sports-workbench" src="public/logo.svg" width="56" />
+<img alt="sports-workbench" src="public/logo.svg" width="80" />
 
 # sports-workbench
 
-**A verifiable sports trading workbench for the TxLINE / TxODDS World Cup hackathon.**
+A verifiable sports trading workbench for the TxLINE / TxODDS World Cup hackathon.
 Every signal is anchored to a Solana Merkle proof. Free tier, on-chain, open source.
 
-<p align="center">
-  <img src="public/demo-green.gif" alt="sports-workbench CLI demo — verifiable signals streaming on Solana devnet" width="720">
+<p>
+  <a href="https://www.npmjs.com/package/@srivtx/sports-workbench"><img alt="npm" src="https://img.shields.io/npm/v/@srivtx/sports-workbench?style=flat-square&color=CB3837&logo=npm&logoColor=white"></a>
+  <a href="https://opensource.org/licenses/MIT"><img alt="license" src="https://img.shields.io/badge/license-MIT-22C55E?style=flat-square"></a>
+  <a href="https://nodejs.org"><img alt="node" src="https://img.shields.io/badge/node-20%2B-339933?style=flat-square&logo=node.js&logoColor=white"></a>
+  <a href="https://www.typescriptlang.org"><img alt="typescript" src="https://img.shields.io/badge/typescript-5-3178C6?style=flat-square&logo=typescript&logoColor=white"></a>
+  <a href="https://solana.com"><img alt="solana" src="https://img.shields.io/badge/solana-9945FF?style=flat-square&logo=solana&logoColor=white"></a>
+  <a href="https://sports-workbench.srivtx.xyz"><img alt="demo" src="https://img.shields.io/badge/demo-sports--workbench.srivtx.xyz-000?style=flat-square&logo=vercel&logoColor=white"></a>
+  <a href="https://github.com/srivtx/sports-workbench"><img alt="repo" src="https://img.shields.io/badge/github.com%2Fsrivtx%2Fsports--workbench-181717?style=flat-square&logo=github&logoColor=white"></a>
 </p>
 
 ```
 npx -p @srivtx/sports-workbench sports-workbench --version
 ```
 
-</div>
-
-<div align="center">
-
-[![npm version](https://img.shields.io/npm/v/@srivtx/sports-workbench.svg)](https://www.npmjs.com/package/@srivtx/sports-workbench)
-[![npm downloads](https://img.shields.io/npm/dm/@srivtx/sports-workbench.svg)](https://www.npmjs.com/package/@srivtx/sports-workbench)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Node 20+](https://img.shields.io/badge/node-20%2B-339933?logo=node.js&logoColor=white)](https://nodejs.org)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
-[![Solana](https://img.shields.io/badge/Solana-mainnet%20%2B%20devnet-9945FF?logo=solana&logoColor=white)](https://solana.com)
-[![Demo](https://img.shields.io/badge/demo-sports--workbench.srivtx.xyz-b6ff3c)](https://sports-workbench.srivtx.xyz)
-[![Repo](https://img.shields.io/badge/repo-github.com-181717?logo=github)](https://github.com/srivtx/sports-workbench)
+<p align="center">
+  <img src="public/demo-green.gif" alt="sports-workbench CLI demo — verifiable signals streaming on Solana devnet" width="720">
+</p>
 
 </div>
 
