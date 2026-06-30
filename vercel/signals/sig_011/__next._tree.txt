@@ -2,4 +2,4 @@
 :HL["https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap","style"]
 :HL["/flags/br.png","image"]
 :HL["/flags/ar.png","image"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"signals","param":null,"prefetchHints":0,"slots":{"children":{"name":"id","param":{"type":"d","key":"sig_011","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"sE3kYL869QFb8up5GKKR5"}
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"signals","param":null,"prefetchHints":0,"slots":{"children":{"name":"id","param":{"type":"d","key":"sig_011","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"J1KgZn_O4nN-hn5CVC90Z"}
