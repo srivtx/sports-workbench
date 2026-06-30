@@ -1,5 +1,5 @@
-:HL["/_next/static/chunks/195t5dpn0it7r.css","style"]
+:HL["/_next/static/chunks/0gut5xexwrhpm.css","style"]
 :HL["https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap","style"]
 :HL["/flags/br.png","image"]
 :HL["/flags/ar.png","image"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"signals","param":null,"prefetchHints":0,"slots":{"children":{"name":"id","param":{"type":"d","key":"sig_011","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"pQ8ynxdLJPFegkAR5ZMHn"}
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"signals","param":null,"prefetchHints":0,"slots":{"children":{"name":"id","param":{"type":"d","key":"sig_011","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"tUiRgEFiY3odY8qyRw3G_"}
