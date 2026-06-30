@@ -160,6 +160,10 @@
     {
       "src": "vercel/demo-green.gif",
       "use": "@vercel/static"
+    },
+    {
+      "src": "vercel/nav.js",
+      "use": "@vercel/static"
     }
   ],
   "headers": [
