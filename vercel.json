@@ -164,6 +164,10 @@
     {
       "src": "vercel/nav.js",
       "use": "@vercel/static"
+    },
+    {
+      "src": "vercel/_copy.js",
+      "use": "@vercel/static"
     }
   ],
   "headers": [
