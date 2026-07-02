@@ -14,7 +14,7 @@ const program = new Command();
 program
   .name("sports-workbench")
   .description("Verifiable sports trading workbench for TxLINE")
-  .version("0.1.6");
+  .version("0.1.8");
 
 // Print the banner before help/version so the binary feels alive.
 const maybePrintBanner = (cmd: Command) => {
@@ -166,10 +166,25 @@ program
   .option("--level <id>", "service level (1=60s delayed, 12=real-time World Cup)", "1")
   .option("--weeks <n>", "duration in weeks (multiple of 4)", "4")
   .option("--rpc <url>", "override Solana RPC")
+  .option("--tx <sig>", "reuse a previous subscribe txSig (skip on-chain, just re-activate)")
   .action(async (opts) => {
     const cfg = readConfig(opts);
     if (opts.rpc) cfg.rpcUrl = opts.rpc;
-    const { subscribeAndActivate } = await import("../solana/subscribe.js");
+    const { subscribeAndActivate, activateApiToken, loadWallet } = await import("../solana/subscribe.js");
+    if (opts.tx) {
+      // Re-activate with an existing txSig — no new on-chain transaction
+      console.error(`[sports-workbench] re-activating with existing txSig ${opts.tx} (no on-chain tx)`);
+      const wallet = await loadWallet();
+      const { apiToken, expiresAt } = await activateApiToken(cfg, opts.tx, wallet, opts.leagues ?? []);
+      console.log(JSON.stringify({
+        txSig: opts.tx,
+        apiToken,
+        expiresAt: new Date(expiresAt).toISOString(),
+        wallet: wallet.publicKey.toBase58(),
+        hint: "Set TXLINE_API_TOKEN=<apiToken> for subsequent commands.",
+      }, null, 2));
+      return;
+    }
     const r = await subscribeAndActivate(cfg, {
       serviceLevelId: Number(opts.level) as 1 | 12,
       weeks: Number(opts.weeks),
@@ -181,7 +196,7 @@ program
       wallet: r.wallet.toBase58(),
       serviceLevelId: r.serviceLevelId,
       weeks: r.weeks,
-      hint: "Set TXLINE_API_TOKEN=<apiToken> for subsequent commands.",
+      hint: "Set TXLINE_API_TOKEN=<apiToken> for subsequent commands. To retry activation only: sports-workbench subscribe --devnet --tx <txSig>",
     }, null, 2));
   });
 

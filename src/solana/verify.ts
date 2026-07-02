@@ -5,21 +5,29 @@
 import * as anchor from "@coral-xyz/anchor";
 import { Connection, PublicKey, ComputeBudgetProgram } from "@solana/web3.js";
 import { getGuestJwt, makeBaseUrl } from "../client/auth.js";
+import { getConnectionWithFallback, redactUrl } from "./connection.js";
 import axios from "axios";
 import type { TxLineConfig, OddsValidation, OddsPayload, ProofNode } from "../types/index.js";
 
 const DEFAULT_PROGRAM_ID = new PublicKey("9ExbZjAapQww1vfcisDmrngPinHTEfpjYRWMunJgcKaA"); // mainnet
-const DEFAULT_RPC = "https://api.mainnet-beta.solana.com";
 const DEFAULT_DEVNET_PROGRAM_ID = new PublicKey("6pW64gN1s2uqjHkn1unFeEjAwJkPGHoppGvS715wyP2J");
-const DEFAULT_DEVNET_RPC = "https://api.devnet.solana.com";
 
 export function getProgramId(config: TxLineConfig): PublicKey {
-  if (config.programId) return new PublicKey(config.programId);
-  return config.devnet ? DEFAULT_DEVNET_PROGRAM_ID : DEFAULT_PROGRAM_ID;
+    if (config.programId) return new PublicKey(config.programId);
+    return config.devnet ? DEFAULT_DEVNET_PROGRAM_ID : DEFAULT_PROGRAM_ID;
 }
 
-export function getConnection(config: TxLineConfig): Connection {
-  return new Connection(config.rpcUrl ?? (config.devnet ? DEFAULT_DEVNET_RPC : DEFAULT_RPC), "confirmed");
+export async function getConnection(config: TxLineConfig): Promise<Connection> {
+    const { conn, safeUrl, fromFallback } = await getConnectionWithFallback(
+        !!config.devnet,
+        config.rpcUrl
+    );
+    if (fromFallback) {
+        console.error(
+            `[sports-workbench] default RPC unreachable, using fallback: ${safeUrl}`
+        );
+    }
+    return conn;
 }
 
 export interface VerifiedSignal {

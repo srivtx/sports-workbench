@@ -7,6 +7,7 @@ import { execSync, spawnSync } from "node:child_process";
 import { existsSync, statSync, readFileSync } from "node:fs";
 import { homedir, platform } from "node:os";
 import { join } from "node:path";
+import { getConnectionWithFallback, redactUrl } from "../solana/connection.js";
 
 interface Check {
   name: string;
@@ -137,7 +138,29 @@ async function runChecks(): Promise<Check[]> {
     detail: dns.detail,
   });
 
+  // ── Solana RPC reachability (with fallback list)
+  const rpc = await checkRpc();
+  checks.push({
+    name: "Solana RPC reachable",
+    ok: rpc.ok,
+    detail: rpc.detail,
+  });
+
   return checks;
+}
+
+async function checkRpc(): Promise<{ ok: boolean; detail: string }> {
+  const results: string[] = [];
+  for (const net of ["devnet", "mainnet"] as const) {
+    try {
+      const { safeUrl, fromFallback } = await getConnectionWithFallback(net === "devnet");
+      results.push(`${net}=${fromFallback ? `fallback(${safeUrl})` : "ok"}`);
+    } catch {
+      results.push(`${net}=fail`);
+    }
+  }
+  const allOk = results.every((r) => !r.endsWith("=fail"));
+  return { ok: allOk, detail: results.join(" ") };
 }
 
 function canWrite(dir: string): boolean {

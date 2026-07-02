@@ -1,6 +1,6 @@
 {
   "name": "@srivtx/sports-workbench",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "Verifiable sports trading workbench for the TxLINE / TxODDS World Cup hackathon. Backtest, signal, and verify on Solana. Free tier, on-chain proof-anchored.",
   "type": "module",
   "main": "./dist/index.js",
