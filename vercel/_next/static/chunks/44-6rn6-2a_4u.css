@@ -9,3 +9,4 @@
 .install-tabs-body{color:var(--lime);background:#0006;align-items:center;gap:12px;padding:14px 16px;font-family:ui-monospace,SF Mono,Menlo,monospace;font-size:13px;display:flex}
 .install-tab-cmd{min-width:0;color:var(--lime);white-space:nowrap;flex:1;overflow-x:auto}
 .install-tabs-body .copy-btn{flex-shrink:0}
+html{scroll-behavior:smooth}
