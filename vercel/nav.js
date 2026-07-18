@@ -47,22 +47,48 @@
         return r.text();
       })
       .then(function (html) {
-        if (window.history && window.history.pushState) {
-          window.history.pushState({ spa: true, url: href }, "", href);
+        var doc = new DOMParser().parseFromString(html, "text/html");
+        // Pre-load page-specific JS chunks synchronously (no async attr).
+        // document.write processes async scripts without a preload scanner,
+        // so they'd otherwise load too late for React hydration.
+        var current = {};
+        document.querySelectorAll("script[src]").forEach(function (s) {
+          current[s.src.split("/").pop()] = true;
+        });
+        var toLoad = [];
+        var news = doc.querySelectorAll("script[src]");
+        for (var i = 0; i < news.length; i++) {
+          var fname = (news[i].getAttribute("src") || "").split("/").pop();
+          if (fname && !current[fname]) toLoad.push(news[i].getAttribute("src"));
         }
-        // Full document swap: faster than a server roundtrip (HTML already in
-        // memory) and ensures all scripts — including page chunks and body-level
-        // runtime scripts — execute properly. The visual flicker is minimal
-        // because there's no network latency.
-        var newDoc = document.open("text/html", "replace");
-        newDoc.write(html);
-        newDoc.close();
-        if (hash) {
-          setTimeout(function () {
-            var el = document.querySelector(hash);
-            if (el) smoothScrollTo(el);
-          }, 100);
-        }
+        var loaded = 0;
+        return Promise.all(toLoad.map(function (src) {
+          return new Promise(function (resolve) {
+            var s = document.createElement("script");
+            s.src = src;
+            s.onload = function () { loaded++; resolve(); };
+            s.onerror = function () { resolve(); };
+            document.head.appendChild(s);
+          });
+        })).then(function () {
+          if (loaded) document.title = doc.title;
+          var newBody = doc.body;
+          if (newBody) {
+            document.body.innerHTML = newBody.innerHTML;
+            reexecuteInlineScripts();
+            if (window.wireCopyButtons) setTimeout(window.wireCopyButtons, 30);
+          }
+          if (window.history && window.history.pushState) {
+            window.history.pushState({ spa: true, url: href }, "", href);
+          }
+          window.scrollTo(0, 0);
+          if (hash) {
+            setTimeout(function () {
+              var el = document.querySelector(hash);
+              if (el) smoothScrollTo(el);
+            }, 100);
+          }
+        });
       })
       .catch(function (err) {
         console.warn("[nav] SPA nav failed, falling back to full nav:", err);
