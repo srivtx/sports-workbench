@@ -47,10 +47,9 @@
         return r.text();
       })
       .then(function (html) {
-        // Only the receipts page is fully vanilla HTML — it can SPA swap.
-        // All other pages are Next.js React exports that need their own
-        // page chunks for proper hydration.
-        if (!/\/receipts\/?$/.test(url)) {
+        // Only vanilla HTML pages can SPA swap safely. Receipts and signals
+        // are fully rewritten without React dependencies.
+        if (!/\/receipts\/?$/.test(url) && !/\/signals\/?$/.test(url)) {
           window.location = href;
           return;
         }

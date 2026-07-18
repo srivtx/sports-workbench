@@ -1,32 +1,405 @@
-<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="/_next/static/chunks/44-6rn6-2a_4u.css" data-precedence="next"/><link rel="preload" as="script" fetchPriority="low" href="/_next/static/chunks/1t-nc0rdiytg4.js"/><script src="/_next/static/chunks/0ij559ox-jw6m.js" async=""></script><script src="/_next/static/chunks/3y5l48con9am7.js" async=""></script><script src="/_next/static/chunks/0pmo_zj16_r8k.js" async=""></script><script src="/_next/static/chunks/turbopack-0lwnkv4pjo-gv.js" async=""></script><script src="/_next/static/chunks/3oe3fc-d-0ore.js" async=""></script><script src="/_next/static/chunks/05gd-8rdu000a.js" async=""></script><script src="/_next/static/chunks/2-sc-rlamr8vh.js" async=""></script><link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" as="style"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/><link rel="preconnect" href="https://txline.txodds.com"/><link rel="preconnect" href="https://txline-dev.txodds.com"/><link rel="icon" href="/favicon.svg" type="image/svg+xml"/><link rel="apple-touch-icon" href="/favicon.svg"/><meta name="theme-color" content="#050505"/><title>sports-workbench — verifiable sports trading on Solana</title><meta name="description" content="A verifiable sports trading workbench for the TxODDS World Cup Hackathon. Every signal is anchored to a Solana Merkle proof. Free tier, on-chain, open source."/><meta property="og:title" content="sports-workbench"/><meta property="og:description" content="A live sports feed. Every tick, signed on-chain. Built for the TxODDS World Cup Hackathon."/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="sports-workbench"/><meta name="twitter:description" content="A live sports feed. Every tick, signed on-chain. Built for the TxODDS World Cup Hackathon."/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/><script src="/_next/static/chunks/0cz1d0mv5g_q7.js" noModule=""></script><script src="/nav.js?v=8" defer></script></head><body><div hidden=""><!--$--><!--/$--></div><div class="bg-aurora" aria-hidden="true"></div><div class="bg-scan" aria-hidden="true"></div><div class="grain" aria-hidden="true"></div><header class="nav"><div class="nav-inner"><a class="brand" aria-label="sports-workbench home" href="/"><svg width="26" height="26" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="32" height="32" rx="7" fill="#B6FF3C"></rect><path d="M 11 10 Q 8 10 8 13 Q 8 16 11 16 L 21 16 Q 24 16 24 19 Q 24 22 21 22 L 8 22" stroke="#000" stroke-width="2.4" stroke-linecap="round" fill="none"></path></svg><span class="brand-text" style="font-size:15px">sports<span class="brand-text-dim">-workbench</span></span></a><nav class="nav-links" aria-label="Primary"><a href="/signals/">signals</a><a href="/fixtures/">fixtures</a><a href="/receipts/">receipts</a><a href="/playground/">playground</a><a href="/agent/">agent</a><a href="/dev/">api</a><a href="https://github.com/srivtx/sports-workbench" target="_blank" rel="noreferrer">repo</a></nav><a class="nav-cta" href="/install/">install →</a><button class="nav-hamburger" aria-label="Open menu" aria-expanded="false">≡</button></div><div class="nav-mobile"><a href="/signals/">signals</a><a href="/fixtures/">fixtures</a><a href="/receipts/">receipts</a><a href="/playground/">playground</a><a href="/agent/">agent</a><a href="/dev/">api</a><a href="https://github.com/srivtx/sports-workbench" target="_blank" rel="noreferrer">repo</a><a href="/install/">install →</a></div></header>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>sports-workbench — live signal feed</title>
+<meta name="description" content="Real-time output of the sports-workbench agent. Every row is a signal fired on a threshold move, with a Verifiable Settlement Receipt anchored to a Solana Merkle root."/>
+<meta property="og:title" content="sports-workbench — signals"/>
+<meta property="og:description" content="12/12 verified signals on Solana devnet."/>
+<meta property="og:type" content="website"/>
+<meta name="twitter:card" content="summary"/>
+<meta name="theme-color" content="#050505"/>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+<link rel="apple-touch-icon" href="/favicon.svg"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#050505;
+  --panel:#0B0B10;
+  --panel-2:#0E0E14;
+  --line:rgba(255,255,255,.07);
+  --line-2:rgba(255,255,255,.12);
+  --text:#EDEDEF;
+  --dim:rgba(237,237,239,.55);
+  --dim-2:rgba(237,237,239,.35);
+  --lime:#B6FF3C;
+  --cyan:#5EE6FF;
+  --pink:#FF4DD8;
+  --yellow:#F0E040;
+  --mono:ui-monospace,"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:Inter,system-ui,-apple-system,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+code{font-family:var(--mono)}
+.container{max-width:1120px;margin:0 auto;padding:0 24px}
 
+.nav{
+  position:sticky;top:0;z-index:50;
+  background:rgba(5,5,5,.82);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+}
+.nav-inner{max-width:1120px;margin:0 auto;padding:0 24px;height:60px;display:flex;align-items:center;gap:28px}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;letter-spacing:-.01em}
+.brand-text-dim{color:var(--dim)}
+.nav-links{display:flex;gap:22px;margin-left:auto}
+.nav-links a{font-size:13.5px;color:var(--dim);font-weight:500;transition:color .15s}
+.nav-links a:hover{color:var(--text)}
+.nav-links a.active{color:var(--lime)}
+.nav-cta{
+  font-size:13px;font-weight:700;color:#000;background:var(--lime);
+  padding:7px 14px;border-radius:8px;transition:transform .12s, box-shadow .12s;
+}
+.nav-cta:hover{transform:translateY(-1px);box-shadow:0 4px 18px rgba(182,255,60,.35)}
+.nav-hamburger{display:none;background:none;border:0;color:var(--text);font-size:22px;cursor:pointer;margin-left:auto}
+.nav-mobile{display:none;flex-direction:column;gap:4px;padding:12px 24px 16px;border-top:1px solid var(--line)}
+.nav-mobile a{font-size:14px;color:var(--dim);padding:8px 0;font-weight:500}
+.nav-mobile a:last-child{color:var(--lime)}
+@media(max-width:860px){.nav-links,.nav-cta{display:none}.nav-hamburger{display:block}.nav-mobile.open{display:flex}}
 
-<main><section class="page-hero"><div class="container"><div class="page-eyebrow fade-in">live · <!-- -->12<!-- --> signals · 100% verified on Solana devnet</div><h1 class="page-title fade-in delay-100">Live signal feed</h1><p class="page-sub fade-in delay-200">Real-time output of the <code>sports-workbench</code> agent. Every row is a signal fired on a threshold move, with a Verifiable Settlement Receipt anchored to a Solana Merkle root. Click any row for the full proof.</p></div></section><section class="sx-section"><div class="container"><div class="sx-stats fade-in delay-300"><div class="sx-stat"><div class="sx-stat-num" style="color:var(--lime)">12</div><div class="sx-stat-label">total signals</div></div><div class="sx-stat"><div class="sx-stat-num" style="color:#14F195">12<!-- -->/<!-- -->12</div><div class="sx-stat-label">verified on-chain</div></div><div class="sx-stat"><div class="sx-stat-num" style="color:var(--lime)">10</div><div class="sx-stat-label">up moves</div></div><div class="sx-stat"><div class="sx-stat-num" style="color:#FF6B6B">2</div><div class="sx-stat-label">down moves</div></div><div class="sx-stat"><div class="sx-stat-num" style="color:var(--gold)">21.8<!-- -->%</div><div class="sx-stat-label">avg |delta|</div></div></div><div class="sx-filter fade-in delay-300"><div class="sx-filter-label">filter by strategy</div><div class="sx-filter-chips"><button class="sx-chip active" style="border-color:var(--lime);background:var(--lime)15;color:var(--lime)">all<span class="sx-chip-count">12</span></button><button class="sx-chip ">sharpDetector<span class="sx-chip-count">6</span></button><button class="sx-chip ">momentum<span class="sx-chip-count">2</span></button><button class="sx-chip ">meanReversion<span class="sx-chip-count">3</span></button><button class="sx-chip ">custom<span class="sx-chip-count">1</span></button></div><div class="sx-filter-count">showing <strong>12</strong> of <!-- -->12</div></div><div class="sx-table-wrap fade-in delay-400"><div class="sx-table-head"><div class="sx-th" style="flex:0 0 80px">time</div><div class="sx-th" style="flex:0 0 130px">fixture</div><div class="sx-th" style="flex:1 1 180px">market</div><div class="sx-th" style="flex:0 0 120px">strategy</div><div class="sx-th" style="flex:0 0 120px;text-align:right">odds</div><div class="sx-th" style="flex:0 0 70px;text-align:right">delta</div><div class="sx-th" style="flex:1 1 160px">messageId</div></div><div class="sx-table-body" id="signals-rows" ><a class="sx-row up" href="/signals/sig_001/"><div class="sx-td sx-time" style="flex:0 0 80px">4d ago</div><div class="sx-td sx-fixture" style="flex:0 0 130px"><span class="sx-teams">BRA<!-- --> <span class="sx-vs">vs</span> <!-- -->ARG</span><span class="sx-fixture-id">#<!-- -->17588234</span></div><div class="sx-td sx-market" style="flex:1 1 180px">O/U 1.5 home goals</div><div class="sx-td" style="flex:0 0 120px"><span class="sx-strategy" style="color:#5EE6FF;background:#5EE6FF15;border-color:#5EE6FF30">sharpDetector</span></div><div class="sx-td sx-odds" style="flex:0 0 120px;text-align:right"><span class="sx-odd-before">1.62</span><span class="sx-odd-arrow">→</span><span class="sx-odd-after">2.28</span></div><div class="sx-td sx-delta up" style="flex:0 0 70px;text-align:right">+<!-- -->40.61<!-- -->%</div><div class="sx-td sx-mid" style="flex:1 1 160px"><code class="sx-hash">1835131630:00003:000063-10021-stab</code><button class="sx-copy " title="1835131630:00003:000063-10021-stab">copy</button></div></a><a class="sx-row up" href="/signals/sig_002/"><div class="sx-td sx-time" style="flex:0 0 80px">4d ago</div><div class="sx-td sx-fixture" style="flex:0 0 130px"><span class="sx-teams">GER<!-- --> <span class="sx-vs">vs</span> <!-- -->ESP</span><span class="sx-fixture-id">#<!-- -->18172280</span></div><div class="sx-td sx-market" style="flex:1 1 180px">1X2 draw</div><div class="sx-td" style="flex:0 0 120px"><span class="sx-strategy" style="color:#5EE6FF;background:#5EE6FF15;border-color:#5EE6FF30">sharpDetector</span></div><div class="sx-td sx-odds" style="flex:0 0 120px;text-align:right"><span class="sx-odd-before">3.40</span><span class="sx-odd-arrow">→</span><span class="sx-odd-after">3.98</span></div><div class="sx-td sx-delta up" style="flex:0 0 70px;text-align:right">+<!-- -->16.99<!-- -->%</div><div class="sx-td sx-mid" style="flex:1 1 160px"><code class="sx-hash">1835131630:00003:000062-10021-stab</code><button class="sx-copy " title="1835131630:00003:000062-10021-stab">copy</button></div></a><a class="sx-row up" href="/signals/sig_003/"><div class="sx-td sx-time" style="flex:0 0 80px">4d ago</div><div class="sx-td sx-fixture" style="flex:0 0 130px"><span class="sx-teams">GER<!-- --> <span class="sx-vs">vs</span> <!-- -->ESP</span><span class="sx-fixture-id">#<!-- -->18172280</span></div><div class="sx-td sx-market" style="flex:1 1 180px">AH -0.5 home</div><div class="sx-td" style="flex:0 0 120px"><span class="sx-strategy" style="color:#5EE6FF;background:#5EE6FF15;border-color:#5EE6FF30">sharpDetector</span></div><div class="sx-td sx-odds" style="flex:0 0 120px;text-align:right"><span class="sx-odd-before">1.95</span><span class="sx-odd-arrow">→</span><span class="sx-odd-after">2.76</span></div><div class="sx-td sx-delta up" style="flex:0 0 70px;text-align:right">+<!-- -->41.43<!-- -->%</div><div class="sx-td sx-mid" style="flex:1 1 160px"><code class="sx-hash">1835131630:00003:000061-10021-stab</code><button class="sx-copy " title="1835131630:00003:000061-10021-stab">copy</button></div></a><a class="sx-row up" href="/signals/sig_004/"><div class="sx-td sx-time" style="flex:0 0 80px">4d ago</div><div class="sx-td sx-fixture" style="flex:0 0 130px"><span class="sx-teams">FRA<!-- --> <span class="sx-vs">vs</span> <!-- -->ENG</span><span class="sx-fixture-id">#<!-- -->17901255</span></div><div class="sx-td sx-market" style="flex:1 1 180px">1X2 home</div><div class="sx-td" style="flex:0 0 120px"><span class="sx-strategy" style="color:#B6FF3C;background:#B6FF3C15;border-color:#B6FF3C30">momentum</span></div><div class="sx-td sx-odds" style="flex:0 0 120px;text-align:right"><span class="sx-odd-before">2.21</span><span class="sx-odd-arrow">→</span><span class="sx-odd-after">2.89</span></div><div class="sx-td sx-delta up" style="flex:0 0 70px;text-align:right">+<!-- -->30.76<!-- -->%</div><div class="sx-td sx-mid" style="flex:1 1 160px"><code class="sx-hash">1835131630:00003:000060-10021-stab</code><button class="sx-copy " title="1835131630:00003:000060-10021-stab">copy</button></div></a><a class="sx-row up" href="/signals/sig_005/"><div class="sx-td sx-time" style="flex:0 0 80px">4d ago</div><div class="sx-td sx-fixture" style="flex:0 0 130px"><span class="sx-teams">GER<!-- --> <span class="sx-vs">vs</span> <!-- -->ESP</span><span class="sx-fixture-id">#<!-- -->18172280</span></div><div class="sx-td sx-market" style="flex:1 1 180px">BTTS yes</div><div class="sx-td" style="flex:0 0 120px"><span class="sx-strategy" style="color:#FF4DD8;background:#FF4DD815;border-color:#FF4DD830">meanReversion</span></div><div class="sx-td sx-odds" style="flex:0 0 120px;text-align:right"><span class="sx-odd-before">1.78</span><span class="sx-odd-arrow">→</span><span class="sx-odd-after">1.99</span></div><div class="sx-td sx-delta up" style="flex:0 0 70px;text-align:right">+<!-- -->11.82<!-- -->%</div><div class="sx-td sx-mid" style="flex:1 1 160px"><code class="sx-hash">1835131630:00003:000059-10021-stab</code><button class="sx-copy " title="1835131630:00003:000059-10021-stab">copy</button></div></a><a class="sx-row up" href="/signals/sig_006/"><div class="sx-td sx-time" style="flex:0 0 80px">4d ago</div><div class="sx-td sx-fixture" style="flex:0 0 130px"><span class="sx-teams">BRA<!-- --> <span class="sx-vs">vs</span> <!-- -->ARG</span><span class="sx-fixture-id">#<!-- -->17588234</span></div><div class="sx-td sx-market" style="flex:1 1 180px">O/U 2.5</div><div class="sx-td" style="flex:0 0 120px"><span class="sx-strategy" style="color:#5EE6FF;background:#5EE6FF15;border-color:#5EE6FF30">sharpDetector</span></div><div class="sx-td sx-odds" style="flex:0 0 120px;text-align:right"><span class="sx-odd-before">1.85</span><span class="sx-odd-arrow">→</span><span class="sx-odd-after">2.19</span></div><div class="sx-td sx-delta up" style="flex:0 0 70px;text-align:right">+<!-- -->18.55<!-- -->%</div><div class="sx-td sx-mid" style="flex:1 1 160px"><code class="sx-hash">1835131630:00003:000058-10021-stab</code><button class="sx-copy " title="1835131630:00003:000058-10021-stab">copy</button></div></a><a class="sx-row down" href="/signals/sig_007/"><div class="sx-td sx-time" style="flex:0 0 80px">4d ago</div><div class="sx-td sx-fixture" style="flex:0 0 130px"><span class="sx-teams">FRA<!-- --> <span class="sx-vs">vs</span> <!-- -->ENG</span><span class="sx-fixture-id">#<!-- -->17901255</span></div><div class="sx-td sx-market" style="flex:1 1 180px">O/U 1.5</div><div class="sx-td" style="flex:0 0 120px"><span class="sx-strategy" style="color:#FF4DD8;background:#FF4DD815;border-color:#FF4DD830">meanReversion</span></div><div class="sx-td sx-odds" style="flex:0 0 120px;text-align:right"><span class="sx-odd-before">2.94</span><span class="sx-odd-arrow">→</span><span class="sx-odd-after">2.29</span></div><div class="sx-td sx-delta down" style="flex:0 0 70px;text-align:right">-22.18<!-- -->%</div><div class="sx-td sx-mid" style="flex:1 1 160px"><code class="sx-hash">1835131630:00003:000057-10021-stab</code><button class="sx-copy " title="1835131630:00003:000057-10021-stab">copy</button></div></a><a class="sx-row up" href="/signals/sig_008/"><div class="sx-td sx-time" style="flex:0 0 80px">4d ago</div><div class="sx-td sx-fixture" style="flex:0 0 130px"><span class="sx-teams">BRA<!-- --> <span class="sx-vs">vs</span> <!-- -->ARG</span><span class="sx-fixture-id">#<!-- -->17588234</span></div><div class="sx-td sx-market" style="flex:1 1 180px">1X2 away</div><div class="sx-td" style="flex:0 0 120px"><span class="sx-strategy" style="color:#B6FF3C;background:#B6FF3C15;border-color:#B6FF3C30">momentum</span></div><div class="sx-td sx-odds" style="flex:0 0 120px;text-align:right"><span class="sx-odd-before">4.10</span><span class="sx-odd-arrow">→</span><span class="sx-odd-after">4.61</span></div><div class="sx-td sx-delta up" style="flex:0 0 70px;text-align:right">+<!-- -->12.40<!-- -->%</div><div class="sx-td sx-mid" style="flex:1 1 160px"><code class="sx-hash">1835131630:00003:000056-10021-stab</code><button class="sx-copy " title="1835131630:00003:000056-10021-stab">copy</button></div></a><a class="sx-row up" href="/signals/sig_009/"><div class="sx-td sx-time" style="flex:0 0 80px">4d ago</div><div class="sx-td sx-fixture" style="flex:0 0 130px"><span class="sx-teams">GER<!-- --> <span class="sx-vs">vs</span> <!-- -->ESP</span><span class="sx-fixture-id">#<!-- -->18172280</span></div><div class="sx-td sx-market" style="flex:1 1 180px">1X2 home</div><div class="sx-td" style="flex:0 0 120px"><span class="sx-strategy" style="color:#F0E040;background:#F0E04015;border-color:#F0E04030">custom</span></div><div class="sx-td sx-odds" style="flex:0 0 120px;text-align:right"><span class="sx-odd-before">2.40</span><span class="sx-odd-arrow">→</span><span class="sx-odd-after">2.61</span></div><div class="sx-td sx-delta up" style="flex:0 0 70px;text-align:right">+<!-- -->8.77<!-- -->%</div><div class="sx-td sx-mid" style="flex:1 1 160px"><code class="sx-hash">1835131630:00003:000055-10021-stab</code><button class="sx-copy " title="1835131630:00003:000055-10021-stab">copy</button></div></a><a class="sx-row up" href="/signals/sig_010/"><div class="sx-td sx-time" style="flex:0 0 80px">4d ago</div><div class="sx-td sx-fixture" style="flex:0 0 130px"><span class="sx-teams">FRA<!-- --> <span class="sx-vs">vs</span> <!-- -->ENG</span><span class="sx-fixture-id">#<!-- -->17901255</span></div><div class="sx-td sx-market" style="flex:1 1 180px">AH +0.5 away</div><div class="sx-td" style="flex:0 0 120px"><span class="sx-strategy" style="color:#5EE6FF;background:#5EE6FF15;border-color:#5EE6FF30">sharpDetector</span></div><div class="sx-td sx-odds" style="flex:0 0 120px;text-align:right"><span class="sx-odd-before">1.71</span><span class="sx-odd-arrow">→</span><span class="sx-odd-after">1.97</span></div><div class="sx-td sx-delta up" style="flex:0 0 70px;text-align:right">+<!-- -->15.21<!-- -->%</div><div class="sx-td sx-mid" style="flex:1 1 160px"><code class="sx-hash">1835131630:00003:000054-10021-stab</code><button class="sx-copy " title="1835131630:00003:000054-10021-stab">copy</button></div></a><a class="sx-row down" href="/signals/sig_011/"><div class="sx-td sx-time" style="flex:0 0 80px">4d ago</div><div class="sx-td sx-fixture" style="flex:0 0 130px"><span class="sx-teams">BRA<!-- --> <span class="sx-vs">vs</span> <!-- -->ARG</span><span class="sx-fixture-id">#<!-- -->17588234</span></div><div class="sx-td sx-market" style="flex:1 1 180px">BTTS no</div><div class="sx-td" style="flex:0 0 120px"><span class="sx-strategy" style="color:#FF4DD8;background:#FF4DD815;border-color:#FF4DD830">meanReversion</span></div><div class="sx-td sx-odds" style="flex:0 0 120px;text-align:right"><span class="sx-odd-before">2.15</span><span class="sx-odd-arrow">→</span><span class="sx-odd-after">1.95</span></div><div class="sx-td sx-delta down" style="flex:0 0 70px;text-align:right">-9.30<!-- -->%</div><div class="sx-td sx-mid" style="flex:1 1 160px"><code class="sx-hash">1835131630:00003:000053-10021-stab</code><button class="sx-copy " title="1835131630:00003:000053-10021-stab">copy</button></div></a><a class="sx-row up" href="/signals/sig_012/"><div class="sx-td sx-time" style="flex:0 0 80px">4d ago</div><div class="sx-td sx-fixture" style="flex:0 0 130px"><span class="sx-teams">GER<!-- --> <span class="sx-vs">vs</span> <!-- -->ESP</span><span class="sx-fixture-id">#<!-- -->18172280</span></div><div class="sx-td sx-market" style="flex:1 1 180px">O/U 3.5</div><div class="sx-td" style="flex:0 0 120px"><span class="sx-strategy" style="color:#5EE6FF;background:#5EE6FF15;border-color:#5EE6FF30">sharpDetector</span></div><div class="sx-td sx-odds" style="flex:0 0 120px;text-align:right"><span class="sx-odd-before">2.08</span><span class="sx-odd-arrow">→</span><span class="sx-odd-after">2.77</span></div><div class="sx-td sx-delta up" style="flex:0 0 70px;text-align:right">+<!-- -->33.18<!-- -->%</div><div class="sx-td sx-mid" style="flex:1 1 160px"><code class="sx-hash">1835131630:00003:000052-10021-stab</code><button class="sx-copy " title="1835131630:00003:000052-10021-stab">copy</button></div></a></div></div><p class="install-note fade-in delay-400" style="margin-top:24px">Showing <!-- -->12<!-- --> signals from the latest 30-second window. Run<!-- --> <code>npx sports-workbench signal --strategy sharpDetector --threshold 0.5 --devnet</code> <!-- -->to subscribe and stream live.</p></div></section></main><!--$--><!--/$--><footer class="foot"><div class="foot-glow" aria-hidden="true"></div><div class="container foot-inner"><div class="foot-hero"><a class="foot-wordmark" aria-label="sports-workbench home" href="/"><svg width="64" height="64" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="32" height="32" rx="7" fill="#B6FF3C"></rect><path d="M 11 10 Q 8 10 8 13 Q 8 16 11 16 L 21 16 Q 24 16 24 19 Q 24 22 21 22 L 8 22" stroke="#000" stroke-width="2.4" stroke-linecap="round" fill="none"></path></svg><span class="foot-wm-text">sports<span class="foot-wm-dim">-workbench</span></span></a><p class="foot-tagline">Verifiable sports trading on Solana. Every signal ships with a receipt.</p></div><div class="foot-cols"><div class="foot-col"><span class="foot-col-h">product</span><a href="/signals">signals</a><a href="/fixtures">fixtures</a><a href="/receipts">receipts</a><a href="/playground">playground</a></div><div class="foot-col"><span class="foot-col-h">devs</span><a href="/install">install</a><a href="/agent">agent</a><a href="/dev">api</a><a href="https://github.com/srivtx/sports-workbench" target="_blank" rel="noreferrer">repo</a></div><div class="foot-col"><span class="foot-col-h">connect</span><a href="https://github.com/srivtx/sports-workbench" target="_blank" rel="noreferrer">github</a><a href="https://www.npmjs.com/package/@srivtx/sports-workbench" target="_blank" rel="noreferrer">npm</a><a href="https://discord.gg/sports-workbench" target="_blank" rel="noreferrer">discord</a></div></div><div class="foot-strip"><p class="foot-meta">MIT · <code>0.1.9</code> · built by <a href="https://github.com/srivtx" target="_blank" rel="noreferrer">@srivtx</a> for the <a href="https://earn.superteam.fun" target="_blank" rel="noreferrer">Superteam</a> <em>World Cup Hackathon</em></p><a href="https://www.npmjs.com/package/@srivtx/sports-workbench" target="_blank" rel="noreferrer" class="foot-cta-link">npm →</a></div></div></footer><script src="/_next/static/chunks/1t-nc0rdiytg4.js" id="_R_" async=""></script><script>(self.__next_f=self.__next_f||[]).push([0])</script><script>self.__next_f.push([1,"1:\"$Sreact.fragment\"\n2:I[55733,[\"/_next/static/chunks/3oe3fc-d-0ore.js\",\"/_next/static/chunks/05gd-8rdu000a.js\"],\"SmoothScroll\"]\n3:I[81715,[\"/_next/static/chunks/3oe3fc-d-0ore.js\",\"/_next/static/chunks/05gd-8rdu000a.js\"],\"GsapAnimations\"]\n4:I[86072,[\"/_next/static/chunks/3oe3fc-d-0ore.js\",\"/_next/static/chunks/05gd-8rdu000a.js\"],\"Bg\"]\n5:I[86072,[\"/_next/static/chunks/3oe3fc-d-0ore.js\",\"/_next/static/chunks/05gd-8rdu000a.js\"],\"Nav\"]\n6:I[5648,[\"/_next/static/chunks/3oe3fc-d-0ore.js\",\"/_next/static/chunks/05gd-8rdu000a.js\"],\"default\"]\n7:I[27756,[\"/_next/static/chunks/3oe3fc-d-0ore.js\",\"/_next/static/chunks/05gd-8rdu000a.js\"],\"default\"]\n8:I[86072,[\"/_next/static/chunks/3oe3fc-d-0ore.js\",\"/_next/static/chunks/05gd-8rdu000a.js\"],\"Foot\"]\n9:I[31228,[\"/_next/static/chunks/3oe3fc-d-0ore.js\",\"/_next/static/chunks/05gd-8rdu000a.js\"],\"ClientPageRoot\"]\na:I[13524,[\"/_next/static/chunks/3oe3fc-d-0ore.js\",\"/_next/static/chunks/05gd-8rdu000a.js\",\"/_next/static/chunks/2-sc-rlamr8vh.js\"],\"default\"]\nd:I[58435,[\"/_next/static/chunks/3oe3fc-d-0ore.js\",\"/_next/static/chunks/05gd-8rdu000a.js\"],\"OutletBoundary\"]\ne:\"$Sreact.suspense\"\n11:I[58435,[\"/_next/static/chunks/3oe3fc-d-0ore.js\",\"/_next/static/chunks/05gd-8rdu000a.js\"],\"ViewportBoundary\"]\n13:I[58435,[\"/_next/static/chunks/3oe3fc-d-0ore.js\",\"/_next/static/chunks/05gd-8rdu000a.js\"],\"MetadataBoundary\"]\n15:I[91140,[\"/_next/static/chunks/3oe3fc-d-0ore.js\",\"/_next/static/chunks/05gd-8rdu000a.js\"],\"default\",1]\n:HL[\"/_next/static/chunks/44-6rn6-2a_4u.css\",\"style\"]\n:HL[\"https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900\u0026display=swap\",\"style\"]\n"])</script><script>self.__next_f.push([1,"0:{\"P\":null,\"c\":[\"\",\"signals\",\"\"],\"q\":\"\",\"i\":false,\"f\":[[[\"\",{\"children\":[\"signals\",{\"children\":[\"__PAGE__\",{}]}]},\"$undefined\",\"$undefined\",16],[[\"$\",\"$1\",\"c\",{\"children\":[[[\"$\",\"link\",\"0\",{\"rel\":\"stylesheet\",\"href\":\"/_next/static/chunks/44-6rn6-2a_4u.css\",\"precedence\":\"next\",\"crossOrigin\":\"$undefined\",\"nonce\":\"$undefined\"}],[\"$\",\"script\",\"script-0\",{\"src\":\"/_next/static/chunks/3oe3fc-d-0ore.js\",\"async\":true,\"nonce\":\"$undefined\"}],[\"$\",\"script\",\"script-1\",{\"src\":\"/_next/static/chunks/05gd-8rdu000a.js\",\"async\":true,\"nonce\":\"$undefined\"}]],[\"$\",\"html\",null,{\"lang\":\"en\",\"children\":[[\"$\",\"head\",null,{\"children\":[[\"$\",\"link\",null,{\"rel\":\"preconnect\",\"href\":\"https://fonts.googleapis.com\"}],[\"$\",\"link\",null,{\"rel\":\"preconnect\",\"href\":\"https://fonts.gstatic.com\",\"crossOrigin\":\"anonymous\"}],[\"$\",\"link\",null,{\"rel\":\"preconnect\",\"href\":\"https://txline.txodds.com\"}],[\"$\",\"link\",null,{\"rel\":\"preconnect\",\"href\":\"https://txline-dev.txodds.com\"}],[\"$\",\"link\",null,{\"href\":\"https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900\u0026display=swap\",\"rel\":\"stylesheet\"}],[\"$\",\"link\",null,{\"rel\":\"icon\",\"href\":\"/favicon.svg\",\"type\":\"image/svg+xml\"}],[\"$\",\"link\",null,{\"rel\":\"apple-touch-icon\",\"href\":\"/favicon.svg\"}]]}],[\"$\",\"body\",null,{\"children\":[[\"$\",\"$L2\",null,{}],[\"$\",\"$L3\",null,{}],[\"$\",\"$L4\",null,{}],[\"$\",\"$L5\",null,{}],[\"$\",\"$L6\",null,{\"parallelRouterKey\":\"children\",\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L7\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":[[[\"$\",\"title\",null,{\"children\":\"404: This page could not be found.\"}],[\"$\",\"div\",null,{\"style\":{\"fontFamily\":\"system-ui,\\\"Segoe UI\\\",Roboto,Helvetica,Arial,sans-serif,\\\"Apple Color Emoji\\\",\\\"Segoe UI Emoji\\\"\",\"height\":\"100vh\",\"textAlign\":\"center\",\"display\":\"flex\",\"flexDirection\":\"column\",\"alignItems\":\"center\",\"justifyContent\":\"center\"},\"children\":[\"$\",\"div\",null,{\"children\":[[\"$\",\"style\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}\"}}],[\"$\",\"h1\",null,{\"className\":\"next-error-h1\",\"style\":{\"display\":\"inline-block\",\"margin\":\"0 20px 0 0\",\"padding\":\"0 23px 0 0\",\"fontSize\":24,\"fontWeight\":500,\"verticalAlign\":\"top\",\"lineHeight\":\"49px\"},\"children\":404}],[\"$\",\"div\",null,{\"style\":{\"display\":\"inline-block\"},\"children\":[\"$\",\"h2\",null,{\"style\":{\"fontSize\":14,\"fontWeight\":400,\"lineHeight\":\"49px\",\"margin\":0},\"children\":\"This page could not be found.\"}]}]]}]}]],[]],\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}],[\"$\",\"$L8\",null,{}]]}]]}]]}],{\"children\":[[\"$\",\"$1\",\"c\",{\"children\":[null,[\"$\",\"$L6\",null,{\"parallelRouterKey\":\"children\",\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L7\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]]}],{\"children\":[[\"$\",\"$1\",\"c\",{\"children\":[[\"$\",\"$L9\",null,{\"Component\":\"$a\",\"serverProvidedParams\":{\"searchParams\":{},\"params\":{},\"promises\":[\"$@b\",\"$@c\"]}}],[[\"$\",\"script\",\"script-0\",{\"src\":\"/_next/static/chunks/2-sc-rlamr8vh.js\",\"async\":true,\"nonce\":\"$undefined\"}]],[\"$\",\"$Ld\",null,{\"children\":[\"$\",\"$e\",null,{\"name\":\"Next.MetadataOutlet\",\"children\":\"$@f\"}]}]]}],{},null,false,null]},null,false,\"$@10\"]},null,false,null],[\"$\",\"$1\",\"h\",{\"children\":[null,[\"$\",\"$L11\",null,{\"children\":\"$L12\"}],[\"$\",\"div\",null,{\"hidden\":true,\"children\":[\"$\",\"$L13\",null,{\"children\":[\"$\",\"$e\",null,{\"name\":\"Next.Metadata\",\"children\":\"$L14\"}]}]}],null]}],false]],\"m\":\"$undefined\",\"G\":[\"$15\",[[\"$\",\"link\",\"0\",{\"rel\":\"stylesheet\",\"href\":\"/_next/static/chunks/44-6rn6-2a_4u.css\",\"precedence\":\"next\",\"crossOrigin\":\"$undefined\",\"nonce\":\"$undefined\"}]]],\"S\":true,\"h\":null,\"s\":\"$undefined\",\"l\":\"$undefined\",\"p\":\"$undefined\",\"d\":\"$undefined\",\"b\":\"AbnBg2fEzKuIl0N5zConB\"}\n"])</script><script>self.__next_f.push([1,"16:[]\n10:\"$W16\"\nb:{}\nc:\"$0:f:0:1:1:children:1:children:0:props:children:0:props:serverProvidedParams:params\"\n"])</script><script>self.__next_f.push([1,"12:[[\"$\",\"meta\",\"0\",{\"charSet\":\"utf-8\"}],[\"$\",\"meta\",\"1\",{\"name\":\"viewport\",\"content\":\"width=device-width, initial-scale=1\"}],[\"$\",\"meta\",\"2\",{\"name\":\"theme-color\",\"content\":\"#050505\"}]]\n"])</script><script>self.__next_f.push([1,"f:null\n14:[[\"$\",\"title\",\"0\",{\"children\":\"sports-workbench — verifiable sports trading on Solana\"}],[\"$\",\"meta\",\"1\",{\"name\":\"description\",\"content\":\"A verifiable sports trading workbench for the TxODDS World Cup Hackathon. Every signal is anchored to a Solana Merkle proof. Free tier, on-chain, open source.\"}],[\"$\",\"meta\",\"2\",{\"property\":\"og:title\",\"content\":\"sports-workbench\"}],[\"$\",\"meta\",\"3\",{\"property\":\"og:description\",\"content\":\"A live sports feed. Every tick, signed on-chain. Built for the TxODDS World Cup Hackathon.\"}],[\"$\",\"meta\",\"4\",{\"property\":\"og:type\",\"content\":\"website\"}],[\"$\",\"meta\",\"5\",{\"name\":\"twitter:card\",\"content\":\"summary\"}],[\"$\",\"meta\",\"6\",{\"name\":\"twitter:title\",\"content\":\"sports-workbench\"}],[\"$\",\"meta\",\"7\",{\"name\":\"twitter:description\",\"content\":\"A live sports feed. Every tick, signed on-chain. Built for the TxODDS World Cup Hackathon.\"}]]\n"])</script>
-<script data-no-reexec="0">
-(function(){if(window.__sigLive)return;window.__sigLive=1;
+.hero{position:relative;padding:72px 0 40px;overflow:hidden}
+.hero::before{
+  content:"";position:absolute;top:-260px;right:-160px;width:640px;height:640px;border-radius:50%;
+  background:radial-gradient(circle,rgba(182,255,60,.07) 0%,rgba(94,230,255,.05) 42%,transparent 68%);
+  pointer-events:none;
+}
+.status-row{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:26px}
+.status-pill{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--lime);background:rgba(182,255,60,.08);border:1px solid rgba(182,255,60,.22);
+  padding:6px 12px;border-radius:999px;
+}
+.pulse{width:7px;height:7px;border-radius:50%;background:var(--lime);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(182,255,60,.5)}50%{opacity:.6;box-shadow:0 0 0 5px rgba(182,255,60,0)}}
+.net-chip{
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--dim);border:1px solid var(--line-2);padding:6px 12px;border-radius:999px;
+}
+.hero h1{font-size:clamp(38px,5.4vw,60px);font-weight:800;letter-spacing:-.035em;line-height:1.04}
+.hero h1 .grad{background:linear-gradient(92deg,var(--lime),var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{margin-top:18px;max-width:64ch;color:var(--dim);font-size:15.5px;line-height:1.7}
+.hero p code{color:var(--cyan);font-size:13.5px;background:rgba(94,230,255,.07);border:1px solid rgba(94,230,255,.15);padding:1px 6px;border-radius:5px}
 
-var container=document.getElementById("signals-rows");
-if(!container)return;
-fetch("/data/live-signals.json").then(function(r){return r.json()}).then(function(d){
-if(!d||!d.signals||!d.signals.length)return;
-var signals=d.signals.slice(0,12);
-var rows=signals.map(function(s,i){
-var t=new Date(s.detectedAt||s.receivedAt||Date.now());
-var th=String(t.getUTCHours()).padStart(2,"0")+":"+String(t.getUTCMinutes()).padStart(2,"0")+":"+String(t.getUTCSeconds()).padStart(2,"0");
-var td=String(t.getUTCMonth()+1).padStart(2,"0")+"-"+String(t.getUTCDate()).padStart(2,"0");
-var delta=s.deltaPct!=null?s.deltaPct.toFixed(2):"0.00";
-var dir=delta>=0?"up":"down";
-var arr=dir==="up"?"▲":"▼";
-var mid=(s.messageId||"").substring(0,30);
-var colors={"sharpDetector":"#5EE6FF","momentum":"#B6FF3C","meanReversion":"#FF4DD8","custom":"#F0E040"};
-var c=colors[s.strategy]||"#5EE6FF";
-var sc=colors[s.strategy]?c+"12":c+"12";
-return '<a class="sx-row '+dir+'" href="#"><div class="sx-td sx-time" style="flex:0 0 80px">'+th+'<span class="sx-time-d">'+td+'</span></div><div class="sx-td sx-fixture" style="flex:0 0 130px"><span class="sx-teams">#'+s.fixtureId+'</span></div><div class="sx-td sx-market" style="flex:0 0 100px">'+s.marketType||"—"+'</div><div class="sx-td" style="flex:0 0 120px"><span class="sx-strategy" style="color:'+c+';background:'+sc+';border-color:'+c+'30"><span class="sx-strategy-dot" style="background:'+c+'"></span>'+s.strategy+'</span></div><div class="sx-td sx-delta '+dir+'" style="flex:0 0 80px;text-align:right"><span class="sx-delta-arrow">'+arr+'</span>'+Math.abs(parseFloat(delta))+'%</div><div class="sx-td sx-mid" style="flex:1 1 0;min-width:0"><code class="sx-hash">'+mid+'</code></div></a>';
-}).join("");
-container.innerHTML=rows;
-var h=document.querySelector(".sx-hero-stat .sx-stat-num");
-if(h)h.textContent=signals.length;
-}).catch(function(){});
-})();
+.section{padding:26px 0}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.kpi{border:1px solid var(--line);border-radius:14px;background:var(--panel);padding:18px 20px;transition:border-color .15s}
+.kpi:hover{border-color:var(--line-2)}
+.kpi .k-label{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim-2)}
+.kpi .k-val{margin-top:8px;font-size:30px;font-weight:800;letter-spacing:-.02em;font-family:var(--mono)}
+.kpi.lime .k-val{color:var(--lime)}
+.kpi.cyan .k-val{color:var(--cyan)}
+.kpi .k-sub{margin-top:5px;font-size:12px;color:var(--dim);font-family:var(--mono)}
+@media(max-width:860px){.kpis{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:460px){.kpis{grid-template-columns:1fr}}
+
+.table-head{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:14px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{
+  font-family:var(--mono);font-size:12px;color:var(--dim);
+  border:1px solid var(--line-2);background:none;border-radius:999px;
+  padding:6px 14px;cursor:pointer;transition:all .15s;
+}
+.chip:hover{color:var(--text);border-color:rgba(255,255,255,.25)}
+.chip.active{color:#000;background:var(--lime);border-color:var(--lime);font-weight:700}
+.count{margin-left:auto;font-family:var(--mono);font-size:11.5px;color:var(--dim-2);letter-spacing:.06em}
+
+.table-wrap{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--panel)}
+.table-scroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:880px}
+thead th{
+  font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--dim-2);text-align:left;padding:13px 16px;border-bottom:1px solid var(--line);
+  background:rgba(255,255,255,.02);
+}
+tbody tr{transition:background .12s}
+tbody tr:hover{background:rgba(255,255,255,.028)}
+tbody tr + tr td{border-top:1px solid var(--line)}
+td{padding:14px 16px;font-size:13px;vertical-align:middle;white-space:nowrap}
+.t-time{font-family:var(--mono);font-size:12px}
+.t-fix{font-family:var(--mono);font-size:12.5px}
+.t-fix .fid{color:var(--dim-2);font-size:11px;margin-left:4px}
+.t-market{color:var(--dim);font-size:12px;max-width:140px;overflow:hidden;text-overflow:ellipsis}
+.strat-chip{
+  display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11.5px;
+  padding:4px 10px;border-radius:999px;border:1px solid;
+}
+.strat-dot{width:6px;height:6px;border-radius:50%}
+.t-odds{font-family:var(--mono);font-size:12.5px}
+.t-odds .arr{color:var(--dim-2);margin:0 4px}
+.t-delta{font-family:var(--mono);font-weight:700;font-size:13px;text-align:right}
+.t-delta.up{color:var(--lime)}
+.t-delta.down{color:var(--pink)}
+.t-mid{font-family:var(--mono);font-size:11.5px;color:var(--dim);max-width:200px;overflow:hidden;text-overflow:ellipsis}
+.copy-btn{
+  font-family:var(--mono);font-size:10px;letter-spacing:.04em;
+  color:var(--dim-2);background:none;border:1px solid var(--line-2);border-radius:5px;
+  padding:2px 8px;cursor:pointer;transition:color .15s,border-color .15s;
+}
+.copy-btn:hover{color:var(--lime);border-color:rgba(182,255,60,.4)}
+.copy-btn.done{color:var(--lime);border-color:rgba(182,255,60,.4)}
+tr.hidden{display:none}
+
+.empty-state{text-align:center;padding:60px 20px;color:var(--dim)}
+.empty-state code{color:var(--lime);font-size:13px}
+
+.foot-note{text-align:center;padding:40px 0 20px;color:var(--dim-2);font-size:12.5px}
+.foot-note code{color:var(--lime);font-family:var(--mono)}
+
+.foot{margin-top:20px;border-top:1px solid var(--line);padding:48px 0 32px;position:relative;overflow:hidden}
+.foot::before{content:"";position:absolute;bottom:-200px;left:50%;transform:translateX(-50%);width:700px;height:300px;background:radial-gradient(ellipse,rgba(182,255,60,.05),transparent 70%);pointer-events:none}
+.foot-inner{display:flex;flex-wrap:wrap;gap:40px;justify-content:space-between}
+.foot-hero{max-width:300px}
+.foot-wordmark{display:flex;align-items:center;gap:10px;font-weight:700;font-size:16px}
+.foot-wm-dim{color:var(--dim)}
+.foot-tagline{margin-top:12px;color:var(--dim);font-size:13.5px;line-height:1.6}
+.foot-cols{display:flex;gap:56px;flex-wrap:wrap}
+.foot-col{display:flex;flex-direction:column;gap:9px}
+.foot-col-h{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim-2);margin-bottom:4px}
+.foot-col a{font-size:13.5px;color:var(--dim);transition:color .15s}
+.foot-col a:hover{color:var(--text)}
+.foot-strip{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;margin-top:44px;padding-top:22px;border-top:1px solid var(--line)}
+.foot-meta{font-size:12.5px;color:var(--dim-2)}
+.foot-meta code{color:var(--dim)}
+.foot-meta a{color:var(--dim);text-decoration:underline;text-underline-offset:3px}
+.foot-meta a:hover{color:var(--text)}
+.foot-cta-link{font-size:13px;font-weight:600;color:var(--lime)}
+@media(max-width:640px){.foot-inner{flex-direction:column}}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" aria-label="sports-workbench home" href="/">
+      <svg width="26" height="26" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="32" height="32" rx="7" fill="#B6FF3C"/><path d="M 11 10 Q 8 10 8 13 Q 8 16 11 16 L 21 16 Q 24 16 24 19 Q 24 22 21 22 L 8 22" stroke="#000" stroke-width="2.4" stroke-linecap="round" fill="none"/></svg>
+      <span>sports<span class="brand-text-dim">-workbench</span></span>
+    </a>
+    <nav class="nav-links">
+      <a href="/signals/" class="active">signals</a>
+      <a href="/fixtures/">fixtures</a>
+      <a href="/receipts/">receipts</a>
+      <a href="/playground/">playground</a>
+      <a href="/agent/">agent</a>
+      <a href="/dev/">api</a>
+      <a href="https://github.com/srivtx/sports-workbench" target="_blank" rel="noreferrer">repo</a>
+    </nav>
+    <a class="nav-cta" href="/install/">install →</a>
+    <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">≡</button>
+  </div>
+  <div class="nav-mobile" id="navMobile">
+    <a href="/signals/">signals</a><a href="/fixtures/">fixtures</a><a href="/receipts/">receipts</a>
+    <a href="/playground/">playground</a><a href="/agent/">agent</a><a href="/dev/">api</a>
+    <a href="https://github.com/srivtx/sports-workbench" target="_blank" rel="noreferrer">repo</a>
+    <a href="/install/">install →</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <div class="status-row">
+      <span class="status-pill" id="status-pill"><span class="pulse"></span><span id="status-text">loading signals…</span></span>
+      <span class="net-chip">solana <b style="color:var(--cyan)">devnet</b></span>
+    </div>
+    <h1>Live <span class="grad">signal</span> feed</h1>
+    <p>Real-time output of the <code>sports-workbench</code> agent. Every row is a signal fired on a threshold move, with a Verifiable Settlement Receipt anchored to a Solana Merkle root.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="kpis" id="kpis">
+      <div class="kpi"><div class="k-label">total signals</div><div class="k-val" id="k-total">—</div><div class="k-sub" id="k-total-sub"></div></div>
+      <div class="kpi lime"><div class="k-label">verified on-chain</div><div class="k-val" id="k-verified">—</div><div class="k-sub">0% anchored</div></div>
+      <div class="kpi"><div class="k-label">up / down</div><div class="k-val" id="k-ud">—</div><div class="k-sub" id="k-ud-sub"></div></div>
+      <div class="kpi cyan"><div class="k-label">avg |delta|</div><div class="k-val" id="k-avg">—</div><div class="k-sub" id="k-avg-sub"></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="table-head">
+      <div class="chips" id="chips">
+        <button class="chip active" data-f="all">all</button>
+      </div>
+      <span class="count" id="count"></span>
+    </div>
+    <div class="table-wrap">
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>time</th><th>fixture</th><th>market</th><th>strategy</th><th>odds</th><th style="text-align:right">δ</th><th>messageId</th><th></th></tr></thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="foot-note">Run <code>npx sports-workbench signal --strategy sharpDetector --threshold 0.5 --devnet</code> to subscribe and stream live.</div>
+
+<footer class="foot">
+  <div class="container">
+    <div class="foot-inner">
+      <div class="foot-hero">
+        <a class="foot-wordmark" aria-label="sports-workbench home" href="/">
+          <svg width="40" height="40" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="7" fill="#B6FF3C"/><path d="M 11 10 Q 8 10 8 13 Q 8 16 11 16 L 21 16 Q 24 16 24 19 Q 24 22 21 22 L 8 22" stroke="#000" stroke-width="2.4" stroke-linecap="round" fill="none"/></svg>
+          <span>sports<span class="foot-wm-dim">-workbench</span></span>
+        </a>
+        <p class="foot-tagline">Verifiable sports trading on Solana. Every signal ships with a receipt.</p>
+      </div>
+      <div class="foot-cols">
+        <div class="foot-col"><span class="foot-col-h">product</span><a href="/signals/">signals</a><a href="/fixtures/">fixtures</a><a href="/receipts/">receipts</a><a href="/playground/">playground</a></div>
+        <div class="foot-col"><span class="foot-col-h">devs</span><a href="/install/">install</a><a href="/agent/">agent</a><a href="/dev/">api</a><a href="https://github.com/srivtx/sports-workbench" target="_blank" rel="noreferrer">repo</a></div>
+        <div class="foot-col"><span class="foot-col-h">connect</span><a href="https://github.com/srivtx/sports-workbench" target="_blank" rel="noreferrer">github</a><a href="https://www.npmjs.com/package/@srivtx/sports-workbench" target="_blank" rel="noreferrer">npm</a><a href="https://discord.gg/sports-workbench" target="_blank" rel="noreferrer">discord</a></div>
+      </div>
+    </div>
+    <div class="foot-strip">
+      <p class="foot-meta">MIT · <code>0.1.9</code> · built by <a href="https://github.com/srivtx" target="_blank" rel="noreferrer">@srivtx</a> for the <a href="https://earn.superteam.fun" target="_blank" rel="noreferrer">Superteam</a> <em>World Cup Hackathon</em></p>
+      <a href="https://www.npmjs.com/package/@srivtx/sports-workbench" target="_blank" rel="noreferrer" class="foot-cta-link">npm →</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// mobile nav
+document.getElementById('hamburger').addEventListener('click', function(){
+  var m=document.getElementById('navMobile');
+  var o=m.classList.toggle('open');
+  this.setAttribute('aria-expanded',o);
+});
+
+// colors by strategy
+var COLORS={sharpDetector:'#5EE6FF',momentum:'#B6FF3C',meanReversion:'#FF4DD8',custom:'#F0E040'};
+
+function formatTime(ms){
+  var d=new Date(ms);
+  var now=Date.now(),diff=now-d.getTime(),mins=Math.round(diff/6e4);
+  if(mins<1)return 'just now';
+  if(mins<60)return mins+'m ago';
+  return Math.round(mins/60)+'h ago';
+}
+
+function renderAll(signals){
+  var tbody=document.getElementById('tbody');
+  var chips=document.getElementById('chips');
+  var count=document.getElementById('count');
+  var n=signals.length;
+
+  // status pill
+  document.getElementById('status-text').textContent=n+' signals · live';
+
+  // KPI stats
+  var ups=signals.filter(function(s){return(s.deltaPct||0)>=0}).length;
+  var downs=n-ups;
+  var verified=signals.filter(function(s){return s.verified||s.merkleRoot||s.proof}).length;
+  var sum=0;signals.forEach(function(s){sum+=Math.abs(s.deltaPct||0)});
+  var avg=sum/n;
+  var maxDelta=0;signals.forEach(function(s){maxDelta=Math.max(maxDelta,Math.abs(s.deltaPct||0))});
+
+  document.getElementById('k-total').textContent=n;
+  document.getElementById('k-total-sub').textContent='captured from TxLINE';
+  document.getElementById('k-verified').textContent=verified+'/'+n;
+  document.getElementById('k-verified').parentElement.querySelector('.k-sub').textContent=(n?Math.round(verified/n*100):0)+'% anchored';
+  document.getElementById('k-ud').textContent=ups+' / '+downs;
+  document.getElementById('k-ud-sub').textContent='↑ up / ↓ down';
+  document.getElementById('k-avg').textContent=avg.toFixed(1)+'%';
+  document.getElementById('k-avg-sub').textContent='max '+maxDelta.toFixed(1)+'%';
+
+  // table rows
+  var html='';
+  signals.forEach(function(s,i){
+    var t=s.detectedAt||s.receivedAt||Date.now();
+    var delta=s.deltaPct!=null?s.deltaPct:0;
+    var dir=delta>=0?'up':'down';
+    var arr=dir==='up'?'▲':'▼';
+    var c=COLORS[s.strategy]||'#5EE6FF';
+    var mid=(s.messageId||'').substring(0,28);
+    var mkt=s.marketType||'—';
+    var odds='—';
+    if(s.beforePct!=null&&s.afterPct!=null){
+      odds='<span>'+s.beforePct.toFixed(2)+'</span><span class="arr">→</span><span>'+s.afterPct.toFixed(2)+'</span>';
+    }
+    html+='<tr data-strategy="'+s.strategy+'">'
+      +'<td class="t-time">'+formatTime(t)+'</td>'
+      +'<td class="t-fix">#<span class="fid">'+s.fixtureId+'</span></td>'
+      +'<td class="t-market">'+mkt+'</td>'
+      +'<td><span class="strat-chip" style="color:'+c+';background:'+c+'12;border-color:'+c+'35"><span class="strat-dot" style="background:'+c+'"></span>'+s.strategy+'</span></td>'
+      +'<td class="t-odds">'+odds+'</td>'
+      +'<td class="t-delta '+dir+'">'+arr+' '+Math.abs(delta).toFixed(2)+'%</td>'
+      +'<td class="t-mid">'+mid+'</td>'
+      +'<td><button class="copy-btn" data-copy="'+(s.messageId||'')+'">copy</button></td>'
+      +'</tr>';
+  });
+  tbody.innerHTML=html||'<tr><td colspan="8" class="empty-state">No signals yet — run <code>sports-workbench signal</code> to capture live data.</td></tr>';
+
+  // filter chips
+  var strats={};
+  signals.forEach(function(s){strats[s.strategy]=(strats[s.strategy]||0)+1});
+  var chipHtml='<button class="chip active" data-f="all">all <span style="opacity:.5">'+n+'</span></button>';
+  Object.keys(strats).sort().forEach(function(k){
+    chipHtml+='<button class="chip" data-f="'+k+'">'+k+' <span style="opacity:.5">'+strats[k]+'</span></button>';
+  });
+  chips.innerHTML=chipHtml;
+  count.textContent='showing '+n+' of '+n;
+}
+
+// Strategy filter
+document.getElementById('chips').addEventListener('click',function(e){
+  var btn=e.target.closest('.chip');
+  if(!btn)return;
+  document.querySelectorAll('.chip').forEach(function(c){c.classList.remove('active')});
+  btn.classList.add('active');
+  var f=btn.dataset.f,shown=0,total=0;
+  document.querySelectorAll('#tbody tr').forEach(function(r){
+    total++;
+    var show=f==='all'||r.dataset.strategy===f;
+    r.classList.toggle('hidden',!show);
+    if(show)shown++;
+  });
+  document.getElementById('count').textContent='showing '+shown+' of '+total;
+});
+
+// Copy buttons (delegated)
+document.getElementById('tbody').addEventListener('click',function(e){
+  var btn=e.target.closest('.copy-btn');
+  if(!btn)return;
+  e.stopPropagation();
+  var text=btn.dataset.copy;
+  if(!text)return;
+  var done=function(){
+    btn.textContent='copied ✓';btn.classList.add('done');
+    setTimeout(function(){btn.textContent='copy';btn.classList.remove('done')},1400);
+  };
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(done,done);
+  }else{
+    var ta=document.createElement('textarea');
+    ta.value=text;document.body.appendChild(ta);ta.select();
+    try{document.execCommand('copy')}catch(e){}
+    document.body.removeChild(ta);done();
+  }
+});
+
+// Load live data
+fetch('/data/live-signals.json').then(function(r){return r.json()}).then(function(d){
+  var sigs=(d&&d.signals)||[];
+  renderAll(sigs);
+}).catch(function(){
+  document.getElementById('tbody').innerHTML='<tr><td colspan="8" class="empty-state">No signals yet — run <code>sports-workbench signal --strategy sharpDetector --threshold 0.5 --devnet</code> to subscribe and stream live.</td></tr>';
+  document.getElementById('status-text').textContent='0 signals';
+});
 </script>
-</body></html>
+</body>
+</html>
