@@ -54,6 +54,7 @@
         if (newBody) {
           document.body.innerHTML = newBody.innerHTML;
           reexecuteInlineScripts();
+          if (window.wireCopyButtons) setTimeout(window.wireCopyButtons, 30);
         }
 
         if (window.history && window.history.pushState) {

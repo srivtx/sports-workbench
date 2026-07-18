@@ -2,9 +2,12 @@
 // Finds every .copy-btn element, reads the command text from the
 // adjacent <code.inst-cmd-txt> sibling, and wires up a click handler
 // that writes to the clipboard and shows "Copied ✓" feedback.
-// Fallback: uses document.execCommand("copy") on a hidden textarea
-// when navigator.clipboard is unavailable (insecure context, old browser).
+
 (function () {
+  // Inject a tiny style for the "copied" state (transient pop feel)
+  var s = document.createElement("style");
+  s.textContent = ".copy-btn.copied{color:#B6FF3C!important;border-color:#B6FF3C!important;transition:all .2s}.copy-btn.copied .copy-label{color:#B6FF3C}";
+  document.head.appendChild(s);
   function copyToClipboard(text) {
     if (navigator.clipboard && window.isSecureContext) {
       return navigator.clipboard.writeText(text);
@@ -90,4 +93,6 @@
       setTimeout(wire, 50);
     }
   }, true);
+  // Expose for nav.js SPA re-wire + other inline scripts
+  window.wireCopyButtons = wire;
 })();
