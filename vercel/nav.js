@@ -37,6 +37,46 @@
     }
   }
 
+  function spaNavigate(href) {
+    var url = href.split("#")[0];
+    var hash = href.indexOf("#") >= 0 ? href.substring(href.indexOf("#")) : "";
+
+    return fetch(url, { headers: { "X-SPA": "1" } })
+      .then(function (r) {
+        if (!r.ok) throw new Error("HTTP " + r.status);
+        return r.text();
+      })
+      .then(function (html) {
+        var doc = new DOMParser().parseFromString(html, "text/html");
+        if (doc.title) document.title = doc.title;
+
+        var newBody = doc.body;
+        if (newBody) {
+          document.body.innerHTML = newBody.innerHTML;
+          reexecuteInlineScripts();
+        }
+
+        if (window.history && window.history.pushState) {
+          window.history.pushState({ spa: true, url: href }, "", href);
+        }
+        window.scrollTo(0, 0);
+        if (hash) {
+          setTimeout(function () {
+            var el = document.querySelector(hash);
+            if (el) smoothScrollTo(el);
+          }, 50);
+        }
+      })
+      .catch(function (err) {
+        // Only fall back to full nav on network/parse failure
+        console.warn("[nav] SPA nav failed, falling back to full nav:", err);
+        window.location.href = href;
+      });
+  }
+
+  // Exposed so non-anchor navigators (e.g. table rows) can SPA-navigate too.
+  window.spaNavigate = spaNavigate;
+
   function onClick(e) {
     // Only primary button, no modifier keys
     if (e.button !== 0) return;
@@ -72,43 +112,9 @@
       return;
     }
 
-    // Internal link — SPA navigation via fetch + body swap
+    // Internal link — SPA navigation
     e.preventDefault();
-
-    var url = href.split("#")[0];
-    var hash = href.indexOf("#") >= 0 ? href.substring(href.indexOf("#")) : "";
-
-    fetch(url, { headers: { "X-SPA": "1" } })
-      .then(function (r) {
-        if (!r.ok) throw new Error("HTTP " + r.status);
-        return r.text();
-      })
-      .then(function (html) {
-        var doc = new DOMParser().parseFromString(html, "text/html");
-        if (doc.title) document.title = doc.title;
-
-        var newBody = doc.body;
-        if (newBody) {
-          document.body.innerHTML = newBody.innerHTML;
-          reexecuteInlineScripts();
-        }
-
-        if (window.history && window.history.pushState) {
-          window.history.pushState({ spa: true, url: href }, "", href);
-        }
-        window.scrollTo(0, 0);
-        if (hash) {
-          setTimeout(function () {
-            var el = document.querySelector(hash);
-            if (el) smoothScrollTo(el);
-          }, 50);
-        }
-      })
-      .catch(function (err) {
-        // Only fall back to full nav on network/parse failure
-        console.warn("[nav] SPA nav failed, falling back to full nav:", err);
-        window.location.href = href;
-      });
+    spaNavigate(href).catch(function () { /* already handled inside */ });
   }
 
   // Use capture phase so we run BEFORE any element-level or React handler
