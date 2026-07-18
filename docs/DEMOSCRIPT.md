@@ -127,24 +127,24 @@ sports-workbench signal --devnet --strategy sharpDetector --threshold 1.5 --stat
 **SAY (when the first signal fires — point at it):**
 > "There. A signal. The odds just moved, and the agent caught it. For each signal, it also fetches the Merkle proof and saves everything to this file. This can run all day on any server."
 
-**Let it run 30–60 seconds. If a big move fires, stay quiet and let people watch. Then Ctrl+C.**
+**Let it run 30–60 seconds. If a big move fires, stay quiet and let people watch. Then Ctrl+C** — since v0.1.9 the agent stops cleanly and prints how many signals it saved. You can say:
+
+> "Stopped. All saved to the file."
 
 ---
 
 ## COMMAND 4 — Verify one signal on-chain (30 sec)
 
-**First, grab a real messageId and ts from the file. TYPE:**
+**TYPE (one command — it reads your signals file and picks the latest):**
 ```bash
-jq -r '.[0] | "\(.messageId) \(.ts)"' signals.json
+sports-workbench verify --devnet --state ./signals.json
 ```
-Copy the two values. Then **TYPE** (use your real values):
-```bash
-sports-workbench verify --devnet --message-id <messageId> --ts <ts>
-```
-**Screen shows:** the receipt JSON — `messageId`, `subTreeRoot`, `mainTreeProof`, `merkleRoot`, `programId`, `batchRootsPda`.
+**Screen shows:** first a line like `verifying signal #14 fixture=18257865 strategy=sharpDetector deltaPct=50.22`, then the receipt JSON — `messageId`, `subTreeRoot`, `mainTreeProof`, `merkleRoot`, `programId`, `batchRootsPda`.
 
 **SAY:**
-> "Now we verify one signal. This is the receipt. The exact message. The proof. The on-chain root. Any judge can take this and check it against the Solana program. Real data passes. Fake data fails. That is the whole point."
+> "Now we verify one signal. One command. It reads the file, picks the latest signal, and proves it on-chain. This is the receipt. The exact message. The proof. The on-chain root. Any judge can take this and check it against the Solana program. Real data passes. Fake data fails. That is the whole point."
+
+**(Optional: to verify a specific signal, add `--index 3` for the 4th one.)**
 
 ---
 
@@ -189,9 +189,8 @@ export TXLINE_API_TOKEN=<apiToken from above>
 # 3 (the money shot — let it run 30-60s, then Ctrl+C)
 sports-workbench signal --devnet --strategy sharpDetector --threshold 1.5 --state ./signals.json
 
-# 4
-jq -r '.[0] | "\(.messageId) \(.ts)"' signals.json
-sports-workbench verify --devnet --message-id <messageId> --ts <ts>
+# 4 (verifies the latest signal from the file — add --index N for a specific one)
+sports-workbench verify --devnet --state ./signals.json
 
 # 5
 sports-workbench backtest --strategy sharpDetector --from 2026-06-01 --to 2026-07-10 --threshold 2 --out report.json
@@ -205,5 +204,6 @@ jq '{signals, closedTrades, winRate, pnl, sharpe}' report.json
 | Stream is slow / no signals | Lower the threshold: `--threshold 0.5`. Keep recording, say "it fires on small moves too." |
 | A command errors | Stop, fix it, re-record just that command. We cut scenes together. |
 | `subscribe` fails | Use the existing token: `export TXLINE_API_TOKEN=txoracle_api_471e...` (the one from June 26) and skip to Command 3. |
-| Verify fails on a signal | Pick a different signal from `signals.json` (`jq '.[1]...'`) and try again. |
+| Verify says signal "has no messageId/ts" | That signal was captured by the old version. Run the agent again for a minute with v0.1.9, then verify. |
+| Verify says proof fetch failed | The batch commits about 5 minutes after the odds update. Wait a few minutes and run the same command again. |
 | Total time over 5:00 | Cut Command 2's Solscan part and the `doctor` step. Never cut Command 3 (live agent) or Command 4 (verify). |

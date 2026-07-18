@@ -25,6 +25,7 @@ export interface AgentConfig extends TxLineConfig {
 
 export interface StoredSignal extends Signal {
   receivedAt: number;
+  ts?: number; // TxLINE odds Ts — kept so the signal can be (re-)verified on-chain later
   proof?: {
     messageId: string;
     ts: number;
@@ -33,6 +34,18 @@ export interface StoredSignal extends Signal {
     programId: string;
     settlementReceipt: any;
   };
+}
+
+/** Read the local signal store. Exported so the CLI can reuse it. */
+export async function readStoredSignals(statePath: string): Promise<StoredSignal[]> {
+  if (!existsSync(statePath)) return [];
+  try {
+    const text = await readFile(statePath, "utf8");
+    const parsed = JSON.parse(text);
+    return parsed.signals ?? [];
+  } catch {
+    return [];
+  }
 }
 
 export class TxlineTrader {
@@ -48,14 +61,7 @@ export class TxlineTrader {
   }
 
   async loadState(): Promise<StoredSignal[]> {
-    if (!existsSync(this.statePath)) return [];
-    try {
-      const text = await readFile(this.statePath, "utf8");
-      const parsed = JSON.parse(text);
-      return parsed.signals ?? [];
-    } catch {
-      return [];
-    }
+    return readStoredSignals(this.statePath);
   }
 
   async saveState(signals: StoredSignal[]): Promise<void> {
@@ -114,21 +120,24 @@ export class TxlineTrader {
   }
 
   private async verify(odds: OddsPayload, sig: Signal): Promise<StoredSignal> {
+    // Always persist messageId + ts, even when the proof is not fetchable
+    // yet (the Merkle batch commits ~5 min after the update lands).
+    const base: StoredSignal = {
+      ...sig,
+      messageId: odds.MessageId,
+      ts: odds.Ts,
+      receivedAt: Date.now(),
+    };
     try {
       const proof = await proveOdds(this.config, odds);
       return {
-        ...sig,
+        ...base,
         verified: true,
         merkleRoot: proof.merkleRoot,
-        messageId: odds.MessageId,
-        receivedAt: Date.now(),
         proof: proof as any,
       };
     } catch (e) {
-      return {
-        ...sig,
-        receivedAt: Date.now(),
-      };
+      return base;
     }
   }
 }

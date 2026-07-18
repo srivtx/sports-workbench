@@ -80,10 +80,17 @@ JSON store. Drop the binary into a VM or a Cloudflare Worker and let it run.
 ### 4 · verify any receipt on-chain
 
 ```bash
+sports-workbench verify --devnet --state ./my-signals.json
+# → verifies the latest stored signal (use --index N for a specific one)
+# → returns the full Merkle proof + sub-tree proof + on-chain tx
+```
+
+Or verify any odds update directly:
+
+```bash
 sports-workbench verify --devnet \
   --message-id 1835131630:00003:000063-10021-stab \
   --ts 1782457169278
-# → returns the full Merkle proof + sub-tree proof + on-chain tx
 ```
 
 ### 5 · self-heal if something is off

@@ -46,6 +46,9 @@ npx -p @srivtx/sports-workbench sports-workbench signal \
 
 **Generate a Verifiable Settlement Receipt:**
 ```bash
+# latest stored signal — no copy-paste needed:
+npx -p @srivtx/sports-workbench sports-workbench verify --state .sports-workbench-state.json
+# or any odds update directly:
 npx -p @srivtx/sports-workbench sports-workbench verify --message-id <id> --ts <ms>
 ```
 

@@ -3,7 +3,7 @@
 
 import { Command } from "commander";
 import { Backtester } from "../backtest/engine.js";
-import { TxlineTrader } from "../agent/workbench.js";
+import { TxlineTrader, readStoredSignals } from "../agent/workbench.js";
 import { proveOdds } from "../solana/verify.js";
 import { TxLineClient } from "../client/txline.js";
 import { STRATEGIES } from "../backtest/strategies.js";
@@ -14,7 +14,7 @@ const program = new Command();
 program
   .name("sports-workbench")
   .description("Verifiable sports trading workbench for TxLINE")
-  .version("0.1.8");
+  .version("0.1.9");
 
 // Print the banner before help/version so the binary feels alive.
 const maybePrintBanner = (cmd: Command) => {
@@ -110,21 +110,54 @@ program
     });
     const ac = new AbortController();
     process.on("SIGINT", () => ac.abort());
-    await trader.start(ac.signal);
+    try {
+      await trader.start(ac.signal);
+    } catch (e: any) {
+      if (e?.name !== "AbortError") throw e;
+      const n = (await trader.loadState()).length;
+      console.error(`[sports-workbench] stopped. ${n} signal(s) saved to ${opts.state}`);
+      console.error(`[sports-workbench] verify the latest: sports-workbench verify --devnet --state ${opts.state}`);
+    }
   });
 
 program
   .command("verify")
   .description("Generate a Verifiable Settlement Receipt for a single odds update")
-  .requiredOption("--message-id <id>", "the MessageId of the odds update")
-  .requiredOption("--ts <ms>", "the timestamp of the odds update")
+  .option("--message-id <id>", "the MessageId of the odds update")
+  .option("--ts <ms>", "the timestamp of the odds update")
+  .option("--state <path>", "verify a signal from this local store (default: latest)", ".sports-workbench-state.json")
+  .option("--index <n>", "which stored signal to verify (0-based; default: latest)")
   .option("--devnet", "use devnet")
   .action(async (opts) => {
+    let messageId: string | undefined = opts.messageId;
+    let ts: number | undefined = opts.ts !== undefined ? Number(opts.ts) : undefined;
+
+    if (messageId === undefined || ts === undefined) {
+      if (opts.messageId !== undefined || opts.ts !== undefined) {
+        console.error("[sports-workbench] pass both --message-id and --ts, or neither to use the local store");
+        process.exit(1);
+      }
+      const signals = await readStoredSignals(opts.state);
+      if (signals.length === 0) {
+        console.error(`[sports-workbench] no signals in ${opts.state} — run: sports-workbench signal --strategy sharpDetector --state ${opts.state}`);
+        process.exit(1);
+      }
+      const idx = opts.index !== undefined ? Number(opts.index) : signals.length - 1;
+      const s = signals[idx];
+      if (!s || s.messageId === undefined || s.ts === undefined) {
+        console.error(`[sports-workbench] signal #${idx} has no messageId/ts — re-capture it with the latest version`);
+        process.exit(1);
+      }
+      messageId = s.messageId;
+      ts = s.ts;
+      console.error(`[sports-workbench] verifying signal #${idx} fixture=${s.fixtureId} strategy=${s.strategy} deltaPct=${s.deltaPct.toFixed(2)}`);
+    }
+
     const cfg = readConfig(opts);
     const proof = await proveOdds(cfg, {
       FixtureId: 0,
-      MessageId: opts.messageId,
-      Ts: Number(opts.ts),
+      MessageId: messageId,
+      Ts: ts,
       Bookmaker: "",
       BookmakerId: 0,
       SuperOddsType: "",

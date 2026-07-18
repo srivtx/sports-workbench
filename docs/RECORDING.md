@@ -83,9 +83,9 @@ $ sports-workbench signal --devnet --strategy sharpDetector --threshold 1.5 --st
 ---
 
 ### SCENE 4 — Verifiable Settlement Receipt (2:15-2:55) — TERMINAL + SOLSCAN
-**Type (use a real messageId + ts captured in Scene 3):**
+**Type (verifies the latest signal captured in Scene 3 — no copy-paste):**
 ```bash
-$ sports-workbench verify --devnet --message-id <MSGID> --ts <TS>
+$ sports-workbench verify --devnet --state ./signals.json
 ```
 **Show:** receipt JSON — `messageId`, `ts`, `fixtureId`, `subTreeRoot`, `subTreeProof`, `mainTreeProof`, `merkleRoot`, `programId`, `batchRootsPda`. Then Solscan on the `dailyBatchRootsPda` account / program `6pW64gN1s2uqjHkn1unFeEjAwJkPGHoppGvS715wyP2J`.
 
