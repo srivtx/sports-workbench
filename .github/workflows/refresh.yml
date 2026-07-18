@@ -1,0 +1,37 @@
+name: refresh
+
+on:
+  schedule:
+    - cron: '0 * * * *'  # every hour
+  workflow_dispatch:
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: capture live signals (60s)
+        env:
+          TXLINE_API_TOKEN: ${{ secrets.TXLINE_API_TOKEN }}
+        run: |
+          timeout -s SIGINT 60 npx -p @srivtx/sports-workbench sports-workbench signal \
+            --devnet --strategy sharpDetector --threshold 0.5 \
+            --state ./data/live-signals.json || true
+
+      - name: update status
+        run: |
+          N=$(jq '.signals | length' ./data/live-signals.json)
+          jq -n --arg ts "$(date -u +%Y-%m-%dT%H:%M:%SZ)" --argjson n "$N" \
+            '{ts: $ts, signalCount: $n}' > ./data/live-status.json
+
+      - name: commit & push
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add data/
+          git diff --staged --quiet || (git commit -m "data: refresh $(date -u +%Y-%m-%dT%H:%M:%SZ)" && git push)
