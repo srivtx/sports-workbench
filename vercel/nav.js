@@ -47,6 +47,13 @@
         return r.text();
       })
       .then(function (html) {
+        // Playground is a heavy React page that needs its own chunk order —
+        // skip the SPA swap and do a clean full page load.
+        if (/\/playground\/?$/.test(url)) {
+          window.location = href;
+          return;
+        }
+
         var doc = new DOMParser().parseFromString(html, "text/html");
         // Pre-load page-specific JS chunks synchronously (no async attr).
         // document.write processes async scripts without a preload scanner,
