@@ -46,7 +46,9 @@
             e.preventDefault();
             e.stopImmediatePropagation();
             var code = btn.parentElement
-              ? btn.parentElement.querySelector(".inst-cmd-txt")
+              ? (btn.parentElement.querySelector(".inst-cmd-txt") ||
+                 btn.parentElement.querySelector(".install-tab-cmd") ||
+                 btn.parentElement.querySelector("code"))
               : null;
             var text = code ? code.textContent.trim() : "";
             if (!text) {
