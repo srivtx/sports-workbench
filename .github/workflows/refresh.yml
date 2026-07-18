@@ -15,13 +15,13 @@ jobs:
         with:
           node-version: 20
 
-      - name: init state + capture signals (60s)
+      - name: init state + capture signals (120s)
         env:
           TXLINE_API_TOKEN: ${{ secrets.TXLINE_API_TOKEN }}
         run: |
           mkdir -p ./vercel/data
           echo '{"signals":[],"savedAt":null}' > ./vercel/data/live-signals.json
-          timeout -s SIGINT 60 npx @srivtx/sports-workbench@latest signal \
+          timeout -s SIGINT 120 npx @srivtx/sports-workbench@latest signal \
             --devnet --strategy sharpDetector --threshold 0.5 \
             --state ./vercel/data/live-signals.json || true
 
