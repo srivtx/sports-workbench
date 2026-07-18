@@ -21,7 +21,7 @@ jobs:
         run: |
           mkdir -p ./vercel/data
           echo '{"signals":[],"savedAt":null}' > ./vercel/data/live-signals.json
-          timeout -s SIGINT 60 npx @srivtx/sports-workbench@latest -- sports-workbench signal \
+          timeout -s SIGINT 60 npx @srivtx/sports-workbench@latest sports-workbench signal \
             --devnet --strategy sharpDetector --threshold 0.5 \
             --state ./vercel/data/live-signals.json || true
 
