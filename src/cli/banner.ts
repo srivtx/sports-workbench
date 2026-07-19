@@ -53,7 +53,7 @@ const SW = S.map((s, i) => s + "    " + W[i]);
 const BANNER: string[] = [
   ...SW,
   "",
-  "sports-workbench  v0.1.7",
+  "sports-workbench  v0.1.9",
   "verifiable sports trading on solana · free tier · 0 TxL",
 ];
 
