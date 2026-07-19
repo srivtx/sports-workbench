@@ -1,7 +1,10 @@
-// CLI banner — sports-workbench wordmark in ANSI Shadow (figlet) style.
-// Big S (lime→gold vertical gradient) and W (white→cyan→lavender vertical
-// gradient), with "sports-workbench" as a lime wordmark BELOW the mark.
-// Matches the public/demo-green.gif exactly.
+import { readFileSync } from "fs";
+import { dirname, join } from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const pkg = JSON.parse(readFileSync(join(__dirname, "..", "..", "package.json"), "utf8")) as { version: string };
 
 const RESET = "\x1b[0m";
 const BOLD = "\x1b[1m";
@@ -53,7 +56,7 @@ const SW = S.map((s, i) => s + "    " + W[i]);
 const BANNER: string[] = [
   ...SW,
   "",
-  "sports-workbench  v0.1.9",
+  `sports-workbench  v${pkg.version}`,
   "verifiable sports trading on solana · free tier · 0 TxL",
 ];
 

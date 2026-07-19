@@ -2,6 +2,14 @@
 // @srivtx/sports-workbench CLI — backtest, signal, and verify on-chain
 
 import { Command } from "commander";
+import { readFileSync } from "fs";
+import { dirname, join } from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const pkg = JSON.parse(readFileSync(join(__dirname, "..", "..", "package.json"), "utf8")) as { version: string };
+
 import { Backtester } from "../backtest/engine.js";
 import { TxlineTrader, readStoredSignals } from "../agent/workbench.js";
 import { proveOdds } from "../solana/verify.js";
@@ -14,7 +22,7 @@ const program = new Command();
 program
   .name("sports-workbench")
   .description("Verifiable sports trading workbench for TxLINE")
-  .version("0.1.9");
+  .version(pkg.version);
 
 // Print the banner before help/version so the binary feels alive.
 const maybePrintBanner = (cmd: Command) => {
@@ -145,7 +153,7 @@ program
       const idx = opts.index !== undefined ? Number(opts.index) : signals.length - 1;
       const s = signals[idx];
       if (!s || s.messageId === undefined || s.ts === undefined) {
-        console.error(`[sports-workbench] signal #${idx} has no messageId/ts — re-capture it with the latest version`);
+        console.error(`[sports-workbench] signal #${idx} has no messageId/ts — re-capture it with the latest version (${pkg.version})`);
         process.exit(1);
       }
       messageId = s.messageId;
