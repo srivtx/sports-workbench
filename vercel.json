@@ -170,6 +170,10 @@
        "use": "@vercel/static"
      },
      {
+       "src": "vercel/_video-modal.js",
+       "use": "@vercel/static"
+     },
+     {
        "src": "vercel/data/**/*",
        "use": "@vercel/static"
      }
