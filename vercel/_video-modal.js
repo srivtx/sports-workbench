@@ -66,6 +66,7 @@
 
   var styleEl = null;
   var backdrop = null;
+  var closeTimer = null;
 
   function injectCSS() {
     if (styleEl) return;
@@ -100,12 +101,13 @@
   function open() {
     injectCSS();
     if (!backdrop) build();
+    if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
+    backdrop.style.display = "flex";
     var frame = backdrop.querySelector("#vm-frame");
     frame.src = EMBED; // set src only when opening — stops playback on close
     document.body.classList.add("vm-locked");
-    requestAnimationFrame(function () {
-      backdrop.classList.add("open");
-    });
+    void backdrop.offsetWidth; // force reflow so the fade-in transition replays
+    backdrop.classList.add("open");
     document.addEventListener("keydown", onKey);
   }
 
@@ -114,9 +116,10 @@
     backdrop.classList.remove("open");
     document.body.classList.remove("vm-locked");
     document.removeEventListener("keydown", onKey);
-    setTimeout(function () {
-      var frame = backdrop.querySelector("#vm-frame");
-      frame.src = ""; // kill the video so audio stops
+    closeTimer = setTimeout(function () {
+      closeTimer = null;
+      backdrop.querySelector("#vm-frame").src = ""; // kill the video so audio stops
+      backdrop.style.display = "none"; // remove from hit-testing so the page is clickable again
     }, 200);
   }
 
