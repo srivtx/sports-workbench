@@ -1,33 +1,33 @@
 {
   "signals": [
     {
-      "id": "18146819:1842849382:00003:000048-10021-stab:1786959357751",
-      "fixtureId": 18146819,
+      "id": "17615196:1842854517:00003:000229-10021-stab:1786962387849",
+      "fixtureId": 17615196,
       "marketType": "1X2_PARTICIPANT_RESULT",
-      "detectedAt": 1786959357751,
+      "detectedAt": 1786962387849,
       "strategy": "sharpDetector",
-      "beforePct": 49.529,
-      "afterPct": 5.155,
-      "deltaPct": 44.374,
+      "beforePct": 53.107,
+      "afterPct": 40.177,
+      "deltaPct": 12.93,
       "verified": false,
-      "messageId": "1842849382:00003:000048-10021-stab",
-      "ts": 1786959357751,
-      "receivedAt": 1786959357969
+      "messageId": "1842854517:00003:000229-10021-stab",
+      "ts": 1786962387849,
+      "receivedAt": 1786962387961
     },
     {
-      "id": "18146819:1842849398:00003:000005-10021-stab:1786959366023",
-      "fixtureId": 18146819,
-      "marketType": "ASIANHANDICAP_PARTICIPANT_GOALS:line=-2",
-      "detectedAt": 1786959366023,
+      "id": "17615196:1842854582:00003:002619-10021-stab:1786962425652",
+      "fixtureId": 17615196,
+      "marketType": "ASIANHANDICAP_PARTICIPANT_GOALS:line=0",
+      "detectedAt": 1786962425652,
       "strategy": "sharpDetector",
-      "beforePct": 5.155,
-      "afterPct": 49.188,
-      "deltaPct": 44.033,
+      "beforePct": 40.177,
+      "afterPct": 53.135,
+      "deltaPct": 12.957999999999998,
       "verified": false,
-      "messageId": "1842849398:00003:000005-10021-stab",
-      "ts": 1786959366023,
-      "receivedAt": 1786959366296
+      "messageId": "1842854582:00003:002619-10021-stab",
+      "ts": 1786962425652,
+      "receivedAt": 1786962426118
     }
   ],
-  "savedAt": 1786959366415
+  "savedAt": 1786962426523
 }
