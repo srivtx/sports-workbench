@@ -1,19 +1,19 @@
 {
   "signals": [
     {
-      "id": "17615138:1842958834:00003:000258-10021-stab:1787019215440",
-      "fixtureId": 17615138,
-      "marketType": "OVERUNDER_PARTICIPANT_GOALS:line=1",
-      "detectedAt": 1787019215440,
+      "id": "17615194:1842968126:00003:000101-10021-stab:1787024446396",
+      "fixtureId": 17615194,
+      "marketType": "ASIANHANDICAP_PARTICIPANT_GOALS:line=-0.5",
+      "detectedAt": 1787024446396,
       "strategy": "sharpDetector",
-      "beforePct": 11.095,
-      "afterPct": 66.181,
-      "deltaPct": 55.086,
+      "beforePct": 27.972,
+      "afterPct": 50.787,
+      "deltaPct": 22.814999999999998,
       "verified": false,
-      "messageId": "1842958834:00003:000258-10021-stab",
-      "ts": 1787019215440,
-      "receivedAt": 1787019215537
+      "messageId": "1842968126:00003:000101-10021-stab",
+      "ts": 1787024446396,
+      "receivedAt": 1787024446510
     }
   ],
-  "savedAt": 1787019215811
+  "savedAt": 1787024447088
 }
