@@ -1,1 +1,33 @@
-{"signals":[],"savedAt":null}
+{
+  "signals": [
+    {
+      "id": "17615280:1843301589:00003:000093-10021-stab:1787211452509",
+      "fixtureId": 17615280,
+      "marketType": "ASIANHANDICAP_PARTICIPANT_GOALS:line=0.5",
+      "detectedAt": 1787211452509,
+      "strategy": "sharpDetector",
+      "beforePct": 29.735,
+      "afterPct": 54.496,
+      "deltaPct": 24.761000000000003,
+      "verified": false,
+      "messageId": "1843301589:00003:000093-10021-stab",
+      "ts": 1787211452509,
+      "receivedAt": 1787211452793
+    },
+    {
+      "id": "17615280:1843301589:00003:000094-10021-stab:1787211452509",
+      "fixtureId": 17615280,
+      "marketType": "ASIANHANDICAP_PARTICIPANT_GOALS:line=0",
+      "detectedAt": 1787211452509,
+      "strategy": "sharpDetector",
+      "beforePct": 44.984,
+      "afterPct": 60.901,
+      "deltaPct": 15.917000000000002,
+      "verified": false,
+      "messageId": "1843301589:00003:000094-10021-stab",
+      "ts": 1787211452509,
+      "receivedAt": 1787211453383
+    }
+  ],
+  "savedAt": 1787211453824
+}
