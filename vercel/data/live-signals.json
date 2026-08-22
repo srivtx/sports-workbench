@@ -1,1 +1,19 @@
-{"signals":[],"savedAt":null}
+{
+  "signals": [
+    {
+      "id": "18146817:1843591787:00003:003314-10021-stab:1787369801408",
+      "fixtureId": 18146817,
+      "marketType": "OVERUNDER_PARTICIPANT_GOALS:line=2.5",
+      "detectedAt": 1787369801408,
+      "strategy": "sharpDetector",
+      "beforePct": 97.182,
+      "afterPct": 59.524,
+      "deltaPct": 37.658,
+      "verified": false,
+      "messageId": "1843591787:00003:003314-10021-stab",
+      "ts": 1787369801408,
+      "receivedAt": 1787369801841
+    }
+  ],
+  "savedAt": 1787369802309
+}
