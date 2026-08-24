@@ -1,47 +1,33 @@
 {
   "signals": [
     {
-      "id": "18146821:1844028201:00003:000136-10021-stab:1787606659216",
-      "fixtureId": 18146821,
-      "marketType": "OVERUNDER_PARTICIPANT_GOALS:line=4.5",
-      "detectedAt": 1787606659216,
+      "id": "17615299:1844034085:00003:000790-10021-stab:1787609982424",
+      "fixtureId": 17615299,
+      "marketType": "1X2_PARTICIPANT_RESULT",
+      "detectedAt": 1787609982424,
       "strategy": "sharpDetector",
-      "beforePct": 87.032,
-      "afterPct": 85.543,
-      "deltaPct": 1.48899999999999,
+      "beforePct": 37.566,
+      "afterPct": 38.3,
+      "deltaPct": 0.7339999999999947,
       "verified": false,
-      "messageId": "1844028201:00003:000136-10021-stab",
-      "ts": 1787606659216,
-      "receivedAt": 1787606659330
+      "messageId": "1844034085:00003:000790-10021-stab",
+      "ts": 1787609982424,
+      "receivedAt": 1787609982508
     },
     {
-      "id": "18146821:1844028201:00003:000142-10021-stab:1787606659216",
-      "fixtureId": 18146821,
-      "marketType": "OVERUNDER_PARTICIPANT_GOALS:line=0.5",
-      "detectedAt": 1787606659216,
+      "id": "18146829:1844034162:00003:000150-10021-stab:1787610023313",
+      "fixtureId": 18146829,
+      "marketType": "ASIANHANDICAP_PARTICIPANT_GOALS:line=-0.5",
+      "detectedAt": 1787610023313,
       "strategy": "sharpDetector",
-      "beforePct": 87.032,
-      "afterPct": 28.137,
-      "deltaPct": 58.894999999999996,
+      "beforePct": 48.544,
+      "afterPct": 61.087,
+      "deltaPct": 12.543000000000006,
       "verified": false,
-      "messageId": "1844028201:00003:000142-10021-stab",
-      "ts": 1787606659216,
-      "receivedAt": 1787606659739
-    },
-    {
-      "id": "18146821:1844028201:00003:000144-10021-stab:1787606659216",
-      "fixtureId": 18146821,
-      "marketType": "OVERUNDER_PARTICIPANT_GOALS:line=1",
-      "detectedAt": 1787606659216,
-      "strategy": "sharpDetector",
-      "beforePct": 87.032,
-      "afterPct": 44.843,
-      "deltaPct": 42.18899999999999,
-      "verified": false,
-      "messageId": "1844028201:00003:000144-10021-stab",
-      "ts": 1787606659216,
-      "receivedAt": 1787606659847
+      "messageId": "1844034162:00003:000150-10021-stab",
+      "ts": 1787610023313,
+      "receivedAt": 1787610023539
     }
   ],
-  "savedAt": 1787606660137
+  "savedAt": 1787610023968
 }
