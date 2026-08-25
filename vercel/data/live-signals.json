@@ -1,1 +1,33 @@
-{"signals":[],"savedAt":null}
+{
+  "signals": [
+    {
+      "id": "18086892:1844150866:00003:000108-10021-stab:1787675386636",
+      "fixtureId": 18086892,
+      "marketType": "EUROHANDICAP_PARTICIPANT_POINTS:line=2.5",
+      "detectedAt": 1787675386636,
+      "strategy": "sharpDetector",
+      "beforePct": 44.209,
+      "afterPct": 48.146,
+      "deltaPct": 3.9369999999999976,
+      "verified": false,
+      "messageId": "1844150866:00003:000108-10021-stab",
+      "ts": 1787675386636,
+      "receivedAt": 1787675386721
+    },
+    {
+      "id": "18086892:1844150910:00003:000194-10021-stab:1787675409209",
+      "fixtureId": 18086892,
+      "marketType": "MONEYLINE_PARTICIPANT_RESULT",
+      "detectedAt": 1787675409209,
+      "strategy": "sharpDetector",
+      "beforePct": 48.146,
+      "afterPct": 44.033,
+      "deltaPct": 4.1129999999999995,
+      "verified": false,
+      "messageId": "1844150910:00003:000194-10021-stab",
+      "ts": 1787675409209,
+      "receivedAt": 1787675409352
+    }
+  ],
+  "savedAt": 1787675409770
+}
