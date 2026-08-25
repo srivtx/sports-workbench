@@ -1,1 +1,19 @@
-{"signals":[],"savedAt":null}
+{
+  "signals": [
+    {
+      "id": "17615214:1844086549:00003:000009-10021-stab:1787639771045",
+      "fixtureId": 17615214,
+      "marketType": "1X2_PARTICIPANT_RESULT",
+      "detectedAt": 1787639771045,
+      "strategy": "sharpDetector",
+      "beforePct": 37.707,
+      "afterPct": 38.82,
+      "deltaPct": 1.1129999999999995,
+      "verified": false,
+      "messageId": "1844086549:00003:000009-10021-stab",
+      "ts": 1787639771045,
+      "receivedAt": 1787639771249
+    }
+  ],
+  "savedAt": 1787639771627
+}
