@@ -1,19 +1,19 @@
 {
   "signals": [
     {
-      "id": "17615294:1844116680:00003:000293-10021-stab:1787656952347",
-      "fixtureId": 17615294,
+      "id": "18146724:1844125016:00003:000225-10021-stab:1787661442135",
+      "fixtureId": 18146724,
       "marketType": "1X2_PARTICIPANT_RESULT",
-      "detectedAt": 1787656952347,
+      "detectedAt": 1787661442135,
       "strategy": "sharpDetector",
-      "beforePct": 49.702,
-      "afterPct": 51.02,
-      "deltaPct": 1.318000000000005,
+      "beforePct": 65.789,
+      "afterPct": 38.241,
+      "deltaPct": 27.548000000000002,
       "verified": false,
-      "messageId": "1844116680:00003:000293-10021-stab",
-      "ts": 1787656952347,
-      "receivedAt": 1787656952566
+      "messageId": "1844125016:00003:000225-10021-stab",
+      "ts": 1787661442135,
+      "receivedAt": 1787661442370
     }
   ],
-  "savedAt": 1787656952867
+  "savedAt": 1787661442787
 }
