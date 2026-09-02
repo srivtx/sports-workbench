@@ -1,1 +1,19 @@
-{"signals":[],"savedAt":null}
+{
+  "signals": [
+    {
+      "id": "18041573:1845471957:00003:000384-1-10021-stab:1788392856342",
+      "fixtureId": 18041573,
+      "marketType": "OVERUNDER_PARTICIPANT_POINTS:line=50.5",
+      "detectedAt": 1788392856342,
+      "strategy": "sharpDetector",
+      "beforePct": 50.15,
+      "afterPct": 49.628,
+      "deltaPct": 0.5219999999999985,
+      "verified": false,
+      "messageId": "1845471957:00003:000384-1-10021-stab",
+      "ts": 1788392856342,
+      "receivedAt": 1788392856435
+    }
+  ],
+  "savedAt": 1788392856822
+}
