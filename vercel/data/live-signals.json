@@ -1,1 +1,19 @@
-{"signals":[],"savedAt":null}
+{
+  "signals": [
+    {
+      "id": "17615356:1846745397:00003:000031-10021-stab:1789068401079",
+      "fixtureId": 17615356,
+      "marketType": "ASIANHANDICAP_PARTICIPANT_GOALS:line=0",
+      "detectedAt": 1789068401079,
+      "strategy": "sharpDetector",
+      "beforePct": 36.456,
+      "afterPct": 59.666,
+      "deltaPct": 23.209999999999994,
+      "verified": false,
+      "messageId": "1846745397:00003:000031-10021-stab",
+      "ts": 1789068401079,
+      "receivedAt": 1789068401247
+    }
+  ],
+  "savedAt": 1789068401768
+}
