@@ -1,19 +1,61 @@
 {
   "signals": [
     {
-      "id": "17615356:1846745397:00003:000031-10021-stab:1789068401079",
-      "fixtureId": 17615356,
-      "marketType": "ASIANHANDICAP_PARTICIPANT_GOALS:line=0",
-      "detectedAt": 1789068401079,
+      "id": "18146843:1846764307:00003:000271-10021-stab:1789078303353",
+      "fixtureId": 18146843,
+      "marketType": "ASIANHANDICAP_PARTICIPANT_GOALS:line=-0.5",
+      "detectedAt": 1789078303353,
       "strategy": "sharpDetector",
-      "beforePct": 36.456,
-      "afterPct": 59.666,
-      "deltaPct": 23.209999999999994,
+      "beforePct": 14.158,
+      "afterPct": 48.709,
+      "deltaPct": 34.551,
       "verified": false,
-      "messageId": "1846745397:00003:000031-10021-stab",
-      "ts": 1789068401079,
-      "receivedAt": 1789068401247
+      "messageId": "1846764307:00003:000271-10021-stab",
+      "ts": 1789078303353,
+      "receivedAt": 1789078303705
+    },
+    {
+      "id": "18146843:1846764339:00003:000010-10021-stab:1789078321014",
+      "fixtureId": 18146843,
+      "marketType": "ASIANHANDICAP_PARTICIPANT_GOALS:line=-1",
+      "detectedAt": 1789078321014,
+      "strategy": "sharpDetector",
+      "beforePct": 51.282,
+      "afterPct": 57.405,
+      "deltaPct": 6.123000000000005,
+      "verified": false,
+      "messageId": "1846764339:00003:000010-10021-stab",
+      "ts": 1789078321014,
+      "receivedAt": 1789078321217
+    },
+    {
+      "id": "18146843:1846764339:00003:000006-10021-stab:1789078321014",
+      "fixtureId": 18146843,
+      "marketType": "1X2_PARTICIPANT_RESULT",
+      "detectedAt": 1789078321014,
+      "strategy": "sharpDetector",
+      "beforePct": 48.709,
+      "afterPct": 14.17,
+      "deltaPct": 34.539,
+      "verified": false,
+      "messageId": "1846764339:00003:000006-10021-stab",
+      "ts": 1789078321014,
+      "receivedAt": 1789078321712
+    },
+    {
+      "id": "18146895:1846764456:00003:000039-10021-stab:1789078379638",
+      "fixtureId": 18146895,
+      "marketType": "1X2_PARTICIPANT_RESULT",
+      "detectedAt": 1789078379638,
+      "strategy": "sharpDetector",
+      "beforePct": 52.77,
+      "afterPct": 39.339,
+      "deltaPct": 13.431000000000004,
+      "verified": false,
+      "messageId": "1846764456:00003:000039-10021-stab",
+      "ts": 1789078379638,
+      "receivedAt": 1789078379903
     }
   ],
-  "savedAt": 1789068401768
+  "savedAt": 1789078380456
 }
