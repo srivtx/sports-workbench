@@ -1,1 +1,75 @@
-{"signals":[],"savedAt":null}
+{
+  "signals": [
+    {
+      "id": "18146729:1846958499:00003:000737-10021-stab:1789180817831",
+      "fixtureId": 18146729,
+      "marketType": "ASIANHANDICAP_PARTICIPANT_GOALS:line=0",
+      "detectedAt": 1789180817831,
+      "strategy": "sharpDetector",
+      "beforePct": 37.189,
+      "afterPct": 63.452,
+      "deltaPct": 26.262999999999998,
+      "verified": false,
+      "messageId": "1846958499:00003:000737-10021-stab",
+      "ts": 1789180817831,
+      "receivedAt": 1789180817966
+    },
+    {
+      "id": "18146729:1846958559:00003:000445-10021-stab:1789180847852",
+      "fixtureId": 18146729,
+      "marketType": "ASIANHANDICAP_PARTICIPANT_GOALS:line=0",
+      "detectedAt": 1789180847852,
+      "strategy": "sharpDetector",
+      "beforePct": 37.051,
+      "afterPct": 63.371,
+      "deltaPct": 26.32,
+      "verified": false,
+      "messageId": "1846958559:00003:000445-10021-stab",
+      "ts": 1789180847852,
+      "receivedAt": 1789180847927
+    },
+    {
+      "id": "18146895:1846958559:00003:000423-10021-stab:1789180847852",
+      "fixtureId": 18146895,
+      "marketType": "OVERUNDER_PARTICIPANT_GOALS:line=1",
+      "detectedAt": 1789180847852,
+      "strategy": "sharpDetector",
+      "beforePct": 38.066,
+      "afterPct": 58.651,
+      "deltaPct": 20.585,
+      "verified": false,
+      "messageId": "1846958559:00003:000423-10021-stab",
+      "ts": 1789180847852,
+      "receivedAt": 1789180848450
+    },
+    {
+      "id": "17615222:1846958581:00003:000154-10021-stab:1789180858424",
+      "fixtureId": 17615222,
+      "marketType": "ASIANHANDICAP_PARTICIPANT_GOALS:line=-0.5",
+      "detectedAt": 1789180858424,
+      "strategy": "sharpDetector",
+      "beforePct": 29.36,
+      "afterPct": 52.219,
+      "deltaPct": 22.859,
+      "verified": false,
+      "messageId": "1846958581:00003:000154-10021-stab",
+      "ts": 1789180858424,
+      "receivedAt": 1789180858523
+    },
+    {
+      "id": "17615222:1846958581:00003:000157-10021-stab:1789180858424",
+      "fixtureId": 17615222,
+      "marketType": "ASIANHANDICAP_PARTICIPANT_GOALS:line=0",
+      "detectedAt": 1789180858424,
+      "strategy": "sharpDetector",
+      "beforePct": 47.733,
+      "afterPct": 62.035,
+      "deltaPct": 14.302,
+      "verified": false,
+      "messageId": "1846958581:00003:000157-10021-stab",
+      "ts": 1789180858424,
+      "receivedAt": 1789180858881
+    }
+  ],
+  "savedAt": 1789180859254
+}
