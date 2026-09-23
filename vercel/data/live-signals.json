@@ -1,1 +1,103 @@
-{"signals":[],"savedAt":null}
+{
+  "signals": [
+    {
+      "id": "17932047:1848904213:00003:000173-10021-stab:1790200659570",
+      "fixtureId": 17932047,
+      "marketType": "OVERUNDER_PARTICIPANT_GOALS:line=3",
+      "detectedAt": 1790200659570,
+      "strategy": "sharpDetector",
+      "beforePct": 35.273,
+      "afterPct": 47.348,
+      "deltaPct": 12.074999999999996,
+      "verified": false,
+      "messageId": "1848904213:00003:000173-10021-stab",
+      "ts": 1790200659570,
+      "receivedAt": 1790200659726
+    },
+    {
+      "id": "17932047:1848904213:00003:000175-10021-stab:1790200659570",
+      "fixtureId": 17932047,
+      "marketType": "OVERUNDER_PARTICIPANT_GOALS:line=3.5",
+      "detectedAt": 1790200659570,
+      "strategy": "sharpDetector",
+      "beforePct": 64.725,
+      "afterPct": 41.135,
+      "deltaPct": 23.589999999999996,
+      "verified": false,
+      "messageId": "1848904213:00003:000175-10021-stab",
+      "ts": 1790200659570,
+      "receivedAt": 1790200660260
+    },
+    {
+      "id": "17932047:1848904260:00003:000014-10021-stab:1790200684468",
+      "fixtureId": 17932047,
+      "marketType": "OVERUNDER_PARTICIPANT_GOALS:line=2.5",
+      "detectedAt": 1790200684468,
+      "strategy": "sharpDetector",
+      "beforePct": 47.348,
+      "afterPct": 36.496,
+      "deltaPct": 10.851999999999997,
+      "verified": false,
+      "messageId": "1848904260:00003:000014-10021-stab",
+      "ts": 1790200684468,
+      "receivedAt": 1790200684723
+    },
+    {
+      "id": "18041502:1848904333:00003:000015-10021-stab:1790200726212",
+      "fixtureId": 18041502,
+      "marketType": "MONEYLINE_PARTICIPANT_RESULT",
+      "detectedAt": 1790200726212,
+      "strategy": "sharpDetector",
+      "beforePct": 47.326,
+      "afterPct": 43.535,
+      "deltaPct": 3.791000000000004,
+      "verified": false,
+      "messageId": "1848904333:00003:000015-10021-stab",
+      "ts": 1790200726212,
+      "receivedAt": 1790200726707
+    },
+    {
+      "id": "18041501:1848904368:00003:000098-10021-stab:1790200748798",
+      "fixtureId": 18041501,
+      "marketType": "MONEYLINE_PARTICIPANT_RESULT",
+      "detectedAt": 1790200748798,
+      "strategy": "sharpDetector",
+      "beforePct": 56.948,
+      "afterPct": 58.072,
+      "deltaPct": 1.1240000000000023,
+      "verified": false,
+      "messageId": "1848904368:00003:000098-10021-stab",
+      "ts": 1790200748798,
+      "receivedAt": 1790200748893
+    },
+    {
+      "id": "18041501:1848904368:00003:000093-10021-stab:1790200748798",
+      "fixtureId": 18041501,
+      "marketType": "EUROHANDICAP_PARTICIPANT_POINTS:line=-2.5",
+      "detectedAt": 1790200748798,
+      "strategy": "sharpDetector",
+      "beforePct": 43.048,
+      "afterPct": 49.776,
+      "deltaPct": 6.7280000000000015,
+      "verified": false,
+      "messageId": "1848904368:00003:000093-10021-stab",
+      "ts": 1790200748798,
+      "receivedAt": 1790200749480
+    },
+    {
+      "id": "18041501:1848904368:00003:000089-10021-stab:1790200748798",
+      "fixtureId": 18041501,
+      "marketType": "EUROHANDICAP_PARTICIPANT_POINTS:line=-1.5",
+      "detectedAt": 1790200748798,
+      "strategy": "sharpDetector",
+      "beforePct": 43.048,
+      "afterPct": 49.727,
+      "deltaPct": 6.678999999999995,
+      "verified": false,
+      "messageId": "1848904368:00003:000089-10021-stab",
+      "ts": 1790200748798,
+      "receivedAt": 1790200749965
+    }
+  ],
+  "savedAt": 1790200750439
+}
